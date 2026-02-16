@@ -1,0 +1,478 @@
+/* Base styles */
+
+/*
+  Typography token usage (which areas use what):
+  --font-body-*           → body, .content-window; base for main content
+  --font-heading1-*       → .site-title (sidebar site title)
+  --font-heading2-*       → main section h2 (section titles in content)
+  --font-paragraph-*      → main section p
+  --font-nav-*            → .sidebar-wrapper (sidebar/nav font family)
+  --font-nav-label-*      → .sidebar-nav-title ("Contents" label)
+  --font-nav-list-*       → .sidebar-nav-list (overlay list size)
+  --font-heading3-*       → main section h3 (future markdown)
+  --font-heading4-*       → main section h4 (future markdown)
+  --font-small-*          → small / caption-style text (future)
+*/
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+:root {
+  /* Layout */
+  /* Same gap everywhere: sticky bar, index, content */
+  --page-gap: 1rem;
+  /* Larger top padding for content (desktop + mobile) */
+  --content-top-padding: 2rem;
+  --color-content-bg: #F4EDE8;
+  --color-sidebar-bg: #FAF7F5;
+
+  /* Typography tokens (pixel-based) */
+  /* Body / paragraph: 18px */
+  --font-body-family: "Crimson Text", Georgia, serif;
+  --font-body-size: 18px;
+  --font-body-line-height: 1.5;
+  --color-body: inherit;
+
+  /* Heading 1: site title — 24px (same as heading 2) */
+  --font-heading1-family: "Crimson Text", Georgia, serif;
+  --font-heading1-size: 24px;
+  --font-heading1-size-mobile: 16px;
+  --font-heading1-weight: bold;
+  --font-heading1-line-height: 1.25;
+  --color-heading1: #BB0D2E;
+
+  /* Heading 2: section titles in main content — 24px */
+  --font-heading2-family: inherit;
+  --font-heading2-size: 24px;
+  --font-heading2-weight: bold;
+  --font-heading2-line-height: 1.25;
+  --color-heading2: #BB0D2E;
+
+  /* Paragraph: 18px (inherits from body) */
+  --font-paragraph-size: inherit;
+  --font-paragraph-line-height: inherit;
+  --color-paragraph: inherit;
+
+  /* Nav: sidebar/navigation chrome */
+  --font-nav-family: "Crimson Text", Georgia, serif;
+
+  /* Sidebar nav: "Contents" title and list — 16px */
+  --font-nav-label-size: 16px;
+  --font-nav-label-size-overlay: 16px;
+  --font-nav-label-weight: 600;
+  --font-nav-label-line-height: 1.25;
+  --color-nav-label: #666;
+  --font-nav-label-text-transform: none;
+  --font-nav-label-letter-spacing: 0.05em;
+  --font-nav-list-size: 16px;
+
+  /* Heading 3 / 4 and small (future markdown/content) */
+  --font-heading3-size: 20px;
+  --font-heading3-weight: 600;
+  --font-heading4-size: 18px;
+  --font-heading4-weight: 600;
+  --font-small-size: 16px;
+}
+
+/* Smooth scroll when navigating to section anchors (Contents links) */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Uses: --font-body-* */
+body {
+  margin: 0;
+  font-family: var(--font-body-family);
+  font-size: var(--font-body-size);
+  line-height: var(--font-body-line-height);
+  color: var(--color-body);
+  display: flex;
+  min-height: 100vh;
+  /* Page scrolls so sidebar can stay sticky */
+  overflow-x: hidden;
+}
+
+/* Sidebar wrapper: sticky so it stays in view when content scrolls */
+/* Uses: --font-nav-family */
+/* Grid: row 1 = header; row 2 = nav full width. Toggle is positioned on content (fixed) on desktop. */
+.sidebar-wrapper {
+  font-family: var(--font-nav-family);
+  position: sticky;
+  top: 0;
+  align-self: flex-start;
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: auto 1fr;
+  flex-shrink: 0;
+  width: 17rem;
+  height: 100vh;
+  max-height: 100vh;
+  background: var(--color-sidebar-bg);
+  /* Clip content to wrapper when collapsed */
+  overflow: hidden;
+}
+
+.sidebar-wrapper.is-collapsed {
+  width: 0;
+  min-width: 0;
+  border: none;
+}
+
+/* Don't use display:none when collapsed – content stays in layout and is clipped by width:0,
+   so the width transition reveals/hides it smoothly without glitchy clipping. */
+
+/* Sidebar: use contents so header + nav participate in wrapper grid */
+.sidebar {
+  display: contents;
+}
+
+.site-header {
+  grid-column: 1;
+  grid-row: 1;
+  display: flex;
+  align-items: center;
+  height: 3rem;
+  padding: 0 var(--page-gap);
+}
+
+/* Desktop: extra top padding so title isn’t flush with viewport top */
+@media (min-width: 769px) {
+  .site-header {
+    padding-top: var(--page-gap);
+    height: auto;
+    min-height: 3rem;
+    align-items: flex-start;
+  }
+}
+
+/* Uses: --font-heading1-* */
+.site-title {
+  margin: 0;
+  font-family: var(--font-heading1-family);
+  font-size: var(--font-heading1-size);
+  font-weight: var(--font-heading1-weight);
+  line-height: var(--font-heading1-line-height);
+  color: var(--color-heading1);
+}
+
+.site-title a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.site-title a:hover {
+  text-decoration: underline;
+}
+
+/* Nav: full width of wrapper (row 2, both columns), independent of header/toggle row */
+.sidebar-nav {
+  grid-column: 1 / -1;
+  grid-row: 2;
+  min-height: 0;
+  overflow: auto;
+  padding: var(--page-gap);
+}
+
+/* Uses: --font-nav-label-* (hidden: no "Contents" title) */
+.sidebar-nav-title {
+  display: none;
+  margin: 0 0 0.5rem;
+  font-size: var(--font-nav-label-size);
+  font-weight: var(--font-nav-label-weight);
+  line-height: var(--font-nav-label-line-height);
+  text-transform: var(--font-nav-label-text-transform);
+  letter-spacing: var(--font-nav-label-letter-spacing);
+  color: var(--color-nav-label);
+}
+
+.sidebar-nav-list {
+  margin: 0;
+  padding-left: 0;
+  list-style: none;
+}
+
+.sidebar-nav-list a {
+  display: block;
+  margin-left: calc(-1 * var(--page-gap));
+  /* Extend to sidebar right edge (nav padding + scrollbar area) */
+  margin-right: calc(-2 * var(--page-gap));
+  padding: 0.5rem var(--page-gap);
+  padding-right: calc(2 * var(--page-gap));
+  color: inherit;
+  text-decoration: none;
+}
+
+.sidebar-nav-list a:hover {
+  background: var(--color-content-bg);
+}
+
+/* Toggle: on desktop, fixed on content left edge (outside sidebar); no background, hover only */
+.sidebar-toggle {
+  grid-column: 2;
+  grid-row: 1;
+  width: 3rem;
+  height: 3rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  color: inherit;
+  transition: opacity 0.2s ease, transform 0.2s ease;
+}
+
+.sidebar-toggle:hover {
+  opacity: 0.7;
+}
+
+/* Desktop: position toggle on content area (outside sidebar), so when collapsed there's no strip */
+@media (min-width: 769px) {
+  .sidebar-toggle {
+    position: fixed;
+    left: 17rem;
+    top: 0;
+    z-index: 10;
+    grid-column: 1;
+    grid-row: 1;
+  }
+
+  .sidebar-wrapper.is-collapsed .sidebar-toggle {
+    left: 0;
+  }
+
+  /* Reserve space so content doesn't sit under the fixed toggle */
+  .content-window {
+    padding-left: 3rem;
+  }
+}
+
+.sidebar-toggle .sidebar-toggle-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  width: 20px;
+  height: 20px;
+}
+
+.sidebar-toggle .icon-menu {
+  display: none;
+}
+
+.sidebar-toggle .icon-close {
+  display: none;
+}
+
+.sidebar-toggle .icon-expand {
+  display: none;
+}
+
+.sidebar-wrapper.is-collapsed .sidebar-toggle .icon-collapse {
+  display: none;
+}
+
+.sidebar-wrapper.is-collapsed .sidebar-toggle .icon-expand {
+  display: block;
+}
+
+/* Content window: grows with content; page (body) scrolls so sidebar stays sticky */
+/* Uses: --font-body-family (content inherits body; set here for clarity) */
+.content-window {
+  font-family: var(--font-body-family);
+  flex: 1;
+  min-width: 0;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  overflow: visible;
+  background: var(--color-content-bg);
+}
+
+main {
+  flex: 1;
+  padding: var(--content-top-padding) var(--page-gap) var(--page-gap);
+}
+
+/* Desktop: content centered, fixed width (unchanged when sidebar opens/closes) */
+@media (min-width: 769px) {
+  main {
+    /* Half of content area when sidebar is open (17rem) – stays same when sidebar collapsed */
+    max-width: calc((100vw - 17rem) * 0.5);
+    margin-left: auto;
+    margin-right: auto;
+    width: 100%;
+  }
+}
+
+main section {
+  margin-bottom: 2rem;
+  /* When navigating to section, show section title (offset from top) */
+  scroll-margin-top: var(--page-gap);
+}
+
+/* Uses: --font-heading2-* */
+main section h2 {
+  margin: 0 0 0.5rem;
+  font-family: var(--font-heading2-family);
+  font-size: var(--font-heading2-size);
+  font-weight: var(--font-heading2-weight);
+  line-height: var(--font-heading2-line-height);
+  color: var(--color-heading2);
+}
+
+/* Uses: --font-paragraph-* */
+main section p {
+  font-size: var(--font-paragraph-size);
+  line-height: var(--font-paragraph-line-height);
+  color: var(--color-paragraph);
+}
+
+/* Uses: --font-heading3-* */
+main section h3 {
+  margin: 0 0 0.5rem;
+  font-size: var(--font-heading3-size);
+  font-weight: var(--font-heading3-weight);
+}
+
+/* Uses: --font-heading4-* */
+main section h4 {
+  margin: 0 0 0.5rem;
+  font-size: var(--font-heading4-size);
+  font-weight: var(--font-heading4-weight);
+}
+
+/* Mobile: sticky title bar + full-page overlay for sections */
+@media (max-width: 768px) {
+  body {
+    flex-direction: column;
+  }
+
+  .sidebar-wrapper {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    width: 100%;
+    height: auto;
+    max-height: none;
+    min-height: auto;
+    flex-shrink: 0;
+    flex-direction: row;
+    align-items: center;
+    background: var(--color-sidebar-bg);
+    border-right: none;
+    /* Divider: same visual style as desktop (1px edge-to-edge) */
+    border-bottom: 1px solid #ddd;
+    grid-template-columns: 1fr 3rem;
+  }
+
+  .sidebar-toggle {
+    position: static;
+  }
+
+  .content-window {
+    padding-left: 0;
+  }
+
+  .sidebar-wrapper.is-collapsed {
+    width: 100%;
+  }
+
+  .sidebar {
+    flex: 1;
+    min-width: 0;
+    overflow: visible;
+    border-bottom: none;
+    padding: 0;
+  }
+
+  .site-header {
+    padding: 0 var(--page-gap);
+    border-bottom: none;
+  }
+
+  .site-title {
+    font-size: var(--font-heading1-size-mobile);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  /* Hide nav in bar; show only in overlay */
+  .sidebar-nav {
+    display: none;
+    position: fixed;
+    top: 3rem; /* below sticky bar */
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 99;
+    background: var(--color-sidebar-bg);
+    padding: var(--page-gap);
+    overflow: auto;
+    -webkit-overflow-scrolling: touch;
+    /* Divider under sticky bar, same style as main page */
+    border-top: 1px solid #ddd;
+  }
+
+  .sidebar-wrapper.overlay-open .sidebar-nav {
+    display: block;
+  }
+
+  .sidebar-wrapper.overlay-open .sidebar-nav-title {
+    font-size: var(--font-nav-label-size);
+    margin-bottom: 0.5rem;
+  }
+
+  .sidebar-wrapper.overlay-open .sidebar-nav-list {
+    padding-left: 0;
+  }
+
+  .sidebar-nav-list a {
+    min-height: 44px;
+    display: flex;
+    align-items: center;
+  }
+
+  .sidebar-wrapper.overlay-open .sidebar-nav-list a {
+    min-height: 44px;
+    display: flex;
+    align-items: center;
+    margin-left: calc(-1 * var(--page-gap));
+    margin-right: calc(-1 * var(--page-gap));
+    padding: 0 var(--page-gap);
+  }
+
+  .sidebar-toggle {
+    flex-shrink: 0;
+  }
+
+  /* Mobile: show menu (hamburger) when closed, close (X) when overlay open */
+  .sidebar-toggle .icon-menu {
+    display: block;
+  }
+  .sidebar-toggle .icon-close,
+  .sidebar-toggle .icon-expand,
+  .sidebar-toggle .icon-collapse {
+    display: none;
+  }
+  .sidebar-wrapper.overlay-open .sidebar-toggle .icon-menu {
+    display: none;
+  }
+  .sidebar-wrapper.overlay-open .sidebar-toggle .icon-close {
+    display: block;
+  }
+
+  .content-window {
+    min-height: 0;
+  }
+
+  /* Section title visible below sticky bar when navigating */
+  main section {
+    scroll-margin-top: 3rem;
+  }
+}
