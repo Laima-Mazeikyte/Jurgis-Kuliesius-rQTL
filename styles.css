@@ -298,14 +298,13 @@ main {
   padding: var(--content-top-padding) var(--page-gap) var(--page-gap);
 }
 
-/* Desktop: content centered, fixed width (unchanged when sidebar opens/closes) */
+/* Desktop: main content stays 700px until container is too small, then it resizes */
 @media (min-width: 769px) {
   main {
-    /* Half of content area when sidebar is open (17rem) – stays same when sidebar collapsed */
-    max-width: calc((100vw - 17rem) * 0.5);
+    width: 700px;
+    max-width: 100%;
     margin-left: auto;
     margin-right: auto;
-    width: 100%;
   }
 }
 
