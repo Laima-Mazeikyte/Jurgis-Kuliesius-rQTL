@@ -39,12 +39,18 @@
   <div class="content-window" id="top">
     <main>
       <section id="section-1">
-<h2>Section 1</h2>
-<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla mauris est, suscipit eu dapibus nec, placerat quis mi. Quisque nec aliquet felis. Ut ornare, justo ac iaculis tristique, erat lectus condimentum nunc, ut porta libero magna nec tortor. Phasellus rhoncus venenatis leo, a convallis neque efficitur eu. Integer facilisis lectus vel eleifend dictum. Aliquam eleifend faucibus purus, sed vulputate dolor vehicula vitae. Phasellus molestie accumsan rhoncus. Praesent dapibus at mi quis laoreet. Nulla a neque felis. Phasellus nisl massa, tincidunt ut magna quis, aliquet lobortis neque. Duis convallis enim ut molestie consectetur. Aenean mattis gravida justo et aliquam. Ut lorem tortor, ultrices nec euismod ac, commodo ut turpis.</p>
-<p>Suspendisse aliquam eros orci. Pellentesque molestie sagittis quam. Duis eu laoreet felis. Phasellus rhoncus tellus sit amet egestas vulputate. Morbi vitae mauris at felis aliquam viverra. Ut vitae tellus id ante hendrerit dignissim. Etiam sodales tellus vel elit sollicitudin, id cursus nunc dignissim. In congue massa tellus, at eleifend quam rhoncus eu. Maecenas euismod ante at ultrices cursus. Curabitur varius vitae augue ac accumsan.</p>
-<p>Aliquam non felis velit. Fusce quis massa vitae quam dignissim suscipit. Integer blandit quis nisl convallis dapibus. Maecenas interdum lacus est, nec finibus sem lobortis consequat. Aliquam congue, diam vel auctor mollis, leo mi porta leo, at dignissim ipsum tellus non massa. Etiam volutpat vel lectus nec posuere. Praesent vulputate libero ac fermentum vulputate. Pellentesque elementum mauris nec scelerisque efficitur. Etiam in arcu a libero volutpat vulputate id id lectus. Aenean at purus leo. Nulla eget ipsum at dui sollicitudin dictum. Curabitur ut convallis elit.</p>
-<p>Pellentesque pellentesque pulvinar luctus. Sed vulputate risus elit, sed sodales sapien sollicitudin id. Donec lacinia ac neque quis mollis. In interdum, leo a placerat feugiat, orci massa pellentesque dolor, sed gravida orci ipsum tristique erat. Vestibulum tempor augue nibh. Nam quis dui dignissim, hendrerit risus non, molestie neque. Nam dui dui, consequat sit amet ullamcorper quis, rutrum in enim. Sed sit amet magna dictum, aliquam tortor ac, ornare felis. Quisque gravida tincidunt tortor, eget facilisis elit scelerisque a. Ut turpis tellus, accumsan eu cursus eget, imperdiet ac augue. Suspendisse eget commodo quam. Aenean quis libero maximus, maximus magna nec, vulputate tellus. Vivamus magna enim, lacinia suscipit luctus in, tempor ac sem.</p>
-<p>Mauris scelerisque fringilla diam, maximus efficitur leo dignissim vel. Sed hendrerit rutrum lacus, porta maximus neque pharetra vitae. Sed sed magna enim. Curabitur bibendum metus vitae enim rhoncus, ut ornare nibh fermentum. Donec neque urna, cursus id enim sed, tristique egestas neque. Sed nec ultrices leo. Nam volutpat nisl et enim vehicula ullamcorper. Suspendisse pharetra nulla nec tellus pharetra convallis. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. </p>
+<h2>The logic behind Protein Ratios</h2>
+<p>Genome-Wide Association Studies (GWAS) have repeatedly scanned the human genome for associations with thousands of protein levels. The approach has successfully identified numerous causal genetic links to disease by bridging the functional gap in post-GWAS analyses via mendelian randomization, colocalization and other statistical approaches. However, by considering each multiplexed protein in isolation, the GWAS fails to shed light on the pathways through which these proteins are mediating their effects. 
+Here, rather than analyzing protein abundances separately, we analyze ratios of protein pairs in a protein ratio-QTL (rQTL) framework. This approach is designed to increase the signal to noise ratio by canceling out any shared variance between protein pairs.</p>
+<p>Suppose Protein A has a genetic signal (G) but is buried in environmental noise (N), which can be either biological (e.g. inflammation) or technical. Meanwhile, Protein B has no genetic signal in that locus but is affected by the exact same noise (N).</p>
+<ul>
+<li>ProteinA=Genetics(G)+Inflammation(N)</li>
+<li>Protein B has no genetic link but fluctuates similarly with inflammation.</li>
+<li>ProteinB=Inflammation(N)</li>
+<li>When we take the ratio, we subtract the shared environment:</li>
+<li>Ratio=ProteinA – ProteinB = (G+N)−N=G</li>
+</ul>
+<p>The result is a genetic signal, stripped of the biological noise that previously suppressed it.</p>
 
       </section>
 
