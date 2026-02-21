@@ -178,14 +178,17 @@ function createRenderer(sectionId, dimensions) {
     const alt = escapeHtml(text || '');
     const titleAttr = title ? ` title="${escapeHtml(title)}"` : '';
     const caption = text || '';
+    const figureClass = caption ? 'img-figure has-caption' : 'img-figure no-caption';
 
     const dim = dimensions[fullPath];
     const widthAttr = dim ? ` data-pswp-width="${dim.width}"` : '';
     const heightAttr = dim ? ` data-pswp-height="${dim.height}"` : '';
 
+    const ariaLabel = escapeHtml(caption ? `Open image: ${caption}` : 'Open image');
+
     return (
-      `<figure class="img-figure">\n` +
-      `  <a href="${fullPath}"${widthAttr}${heightAttr} target="_blank">\n` +
+      `<figure class="${figureClass}">\n` +
+      `  <a href="${fullPath}"${widthAttr}${heightAttr} target="_blank" aria-label="${ariaLabel}">\n` +
       `    <img src="${fullPath}" alt="${alt}"${titleAttr} loading="lazy" />\n` +
       `  </a>\n` +
       (caption ? `  <figcaption>${escapeHtml(caption)}</figcaption>\n` : '') +
