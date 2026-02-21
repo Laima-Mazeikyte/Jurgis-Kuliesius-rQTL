@@ -19,7 +19,7 @@
       <nav class="sidebar-nav">
         <h2 class="sidebar-nav-title">Contents</h2>
         <ol class="sidebar-nav-list">
-          <li><a href="#section-1">Section 1</a></li>
+          <li><a href="#protein-ratios">The Logic Behind Protein Ratios</a></li>
           <li><a href="#section-2">Section 2</a></li>
           <li><a href="#section-3">Section 3</a></li>
         </ol>
@@ -38,7 +38,7 @@
 
   <div class="content-window" id="top">
     <main>
-      <section id="section-1">
+      <section id="protein-ratios">
 <h2>The logic behind Protein Ratios</h2>
 <p>Genome-Wide Association Studies (GWAS) have repeatedly scanned the human genome for associations with thousands of protein levels. The approach has successfully identified numerous causal genetic links to disease by bridging the functional gap in post-GWAS analyses via mendelian randomization, colocalization and other statistical approaches. However, by considering each multiplexed protein in isolation, the GWAS fails to shed light on the pathways through which these proteins are mediating their effects. 
 Here, rather than analyzing protein abundances separately, we analyze ratios of protein pairs in a protein ratio-QTL (rQTL) framework. This approach is designed to increase the signal to noise ratio by canceling out any shared variance between protein pairs.</p>
@@ -51,6 +51,10 @@ Here, rather than analyzing protein abundances separately, we analyze ratios of 
 <li>Ratio=ProteinA – ProteinB = (G+N)−N=G</li>
 </ul>
 <p>The result is a genetic signal, stripped of the biological noise that previously suppressed it.</p>
+<p><figure class="img-figure">
+  <img src="images/protein-ratios/graph-CSF-SomaScan-7k-full.png" data-full="images/protein-ratios/graph-CSF-SomaScan-7k-full.png" alt="CSF SomaScan 7k" loading="lazy" tabindex="0" />
+  <figcaption>CSF SomaScan 7k</figcaption>
+</figure></p>
 
       </section>
 
