@@ -102,6 +102,7 @@ function imageRefsInMarkdown(mdContent) {
 async function processImages(sections) {
   let totalProcessed = 0;
   const warnings = [];
+  const dimensions = {};
 
   for (const section of sections) {
     const imageFiles = collectImages(section.dirPath);
@@ -137,22 +138,27 @@ async function processImages(sections) {
         continue;
       }
 
+      const meta = await sharp(srcPath).metadata();
+
       // Lossless PNG copy at full resolution — no downscaling so
       // scientific figures with fine text/gridlines stay crisp.
       await sharp(srcPath).png().toFile(path.join(outDir, `${baseName}-full.png`));
+
+      const outKey = `images/${section.id}/${baseName}-full.png`;
+      dimensions[outKey] = { width: meta.width, height: meta.height };
 
       totalProcessed++;
     }
   }
 
-  return { totalProcessed, warnings };
+  return { totalProcessed, warnings, dimensions };
 }
 
 // ---------------------------------------------------------------------------
 // Custom Marked renderer — images become <figure> with lightbox hooks
 // ---------------------------------------------------------------------------
 
-function createRenderer(sectionId) {
+function createRenderer(sectionId, dimensions) {
   const renderer = new marked.Renderer();
 
   renderer.image = function ({ href, title, text }) {
@@ -168,16 +174,20 @@ function createRenderer(sectionId) {
     const fullPath = isSvg
       ? `images/${sectionId}/${href}`
       : `images/${sectionId}/${baseName}-full.png`;
-    const src = fullPath;
-    const fullSrc = fullPath;
 
     const alt = escapeHtml(text || '');
     const titleAttr = title ? ` title="${escapeHtml(title)}"` : '';
     const caption = text || '';
 
+    const dim = dimensions[fullPath];
+    const widthAttr = dim ? ` data-pswp-width="${dim.width}"` : '';
+    const heightAttr = dim ? ` data-pswp-height="${dim.height}"` : '';
+
     return (
       `<figure class="img-figure">\n` +
-      `  <img src="${src}" data-full="${fullSrc}" alt="${alt}"${titleAttr} loading="lazy" tabindex="0" />\n` +
+      `  <a href="${fullPath}"${widthAttr}${heightAttr} target="_blank">\n` +
+      `    <img src="${fullPath}" alt="${alt}"${titleAttr} loading="lazy" />\n` +
+      `  </a>\n` +
       (caption ? `  <figcaption>${escapeHtml(caption)}</figcaption>\n` : '') +
       `</figure>`
     );
@@ -190,10 +200,10 @@ function createRenderer(sectionId) {
 // Build HTML
 // ---------------------------------------------------------------------------
 
-function buildSectionsHtml(sections) {
+function buildSectionsHtml(sections, dimensions) {
   const parts = [];
   for (const section of sections) {
-    const renderer = createRenderer(section.id);
+    const renderer = createRenderer(section.id, dimensions);
     const bodyHtml = marked.parse(section.content, { renderer });
     parts.push(`      <section id="${section.id}">\n${bodyHtml}\n      </section>`);
   }
@@ -218,11 +228,11 @@ async function run() {
   const allWarnings = [...discoverWarnings];
 
   // Process images
-  const { totalProcessed, warnings: imageWarnings } = await processImages(sections);
+  const { totalProcessed, warnings: imageWarnings, dimensions } = await processImages(sections);
   allWarnings.push(...imageWarnings);
 
   // Build HTML
-  const sectionsHtml = buildSectionsHtml(sections);
+  const sectionsHtml = buildSectionsHtml(sections, dimensions);
   const navHtml = buildNavHtml(sections);
 
   let template = fs.readFileSync(TEMPLATE_PATH, 'utf8');

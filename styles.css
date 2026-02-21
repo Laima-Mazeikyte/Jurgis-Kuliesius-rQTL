@@ -510,10 +510,16 @@ main section h4 {
   text-align: center;
 }
 
+.img-figure a {
+  display: inline-block;
+  text-decoration: none;
+  line-height: 0;
+}
+
 .img-figure img {
   max-width: 100%;
   height: auto;
-  border-radius: 4px;
+  border-radius: 12px;
   cursor: zoom-in;
   transition: opacity 0.15s ease;
 }
@@ -535,62 +541,65 @@ main section h4 {
 }
 
 /* ========================================================================
-   Lightbox overlay
+   PhotoSwipe overrides
    ======================================================================== */
 
-.lightbox-overlay {
-  position: fixed;
-  inset: 0;
-  z-index: 200;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: rgba(0, 0, 0, 0.85);
-  padding: 1rem;
+.pswp {
+  --pswp-bg: #fff;
 }
 
-.lightbox-overlay[hidden] {
-  display: none;
+.pswp__img {
+  border-radius: px;
 }
 
-.lightbox-img {
-  max-width: 100vw;
-  max-height: 100vh;
-  object-fit: contain;
-}
-
-.lightbox-close {
-  position: absolute;
-  top: 1rem;
-  right: 1rem;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+.pswp__button--close {
   width: 44px;
   height: 44px;
-  padding: 0;
   border: 1px solid rgba(0, 0, 0, 0.12);
   border-radius: 50%;
   background: rgba(0, 0, 0, 0.06);
   color: #666;
-  cursor: pointer;
   transition: background 0.15s ease;
 }
 
-.lightbox-close:hover {
+.pswp__button--close:hover {
   background: rgba(0, 0, 0, 0.12);
 }
 
-.lightbox-close:focus-visible {
+.pswp__button--close:focus-visible {
   outline: 2px solid #666;
   outline-offset: 2px;
 }
 
-.lightbox-img.lightbox-rotated {
-  transform: rotate(-90deg);
-  transform-origin: center center;
-  max-width: 100vh;
-  max-height: 100vw;
+.pswp__button--arrow {
+  display: none;
+}
+
+.pswp__counter {
+  display: none;
+}
+
+.pswp-zoom-hint {
+  position: absolute;
+  bottom: 2rem;
+  left: 50%;
+  transform: translateX(-50%);
+  padding: 0.5rem 1.25rem;
+  border-radius: 2rem;
+  background: rgba(0, 0, 0, 0.6);
+  color: #fff;
+  font-family: var(--font-body-family);
+  font-size: 14px;
+  line-height: 1;
+  white-space: nowrap;
+  pointer-events: none;
+  z-index: 10;
+  opacity: 1;
+  transition: opacity 0.6s ease;
+}
+
+.pswp-zoom-hint--fade {
+  opacity: 0;
 }
 
 /* ========================================================================

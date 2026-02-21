@@ -9,6 +9,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Crimson+Text:ital,wght@0,400;0,600;0,700&family=Inter:wght@400;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/photoswipe@5.4.4/dist/photoswipe.css">
 </head>
 <body>
   <div class="sidebar-wrapper" id="sidebar-wrapper">
@@ -41,5 +42,41 @@
   </div>
 
   <script src="script.js"></script>
+  <script type="module">
+    import PhotoSwipeLightbox from 'https://cdn.jsdelivr.net/npm/photoswipe@5.4.4/dist/photoswipe-lightbox.esm.min.js';
+    import PhotoSwipe from 'https://cdn.jsdelivr.net/npm/photoswipe@5.4.4/dist/photoswipe.esm.min.js';
+
+    const lightbox = new PhotoSwipeLightbox({
+      gallery: '.img-figure',
+      children: 'a',
+      pswpModule: PhotoSwipe,
+      bgOpacity: 1,
+      tapAction: 'close',
+      counter: false,
+      zoom: false,
+      arrowKeys: false,
+      imageClickAction: 'zoom',
+      padding: { top: 20, bottom: 20, left: 0, right: 0 },
+      closeOnVerticalDrag: true,
+    });
+
+    lightbox.on('openingAnimationEnd', function () {
+      if (!('ontouchstart' in window)) return;
+      if (sessionStorage.getItem('pswp-hint-shown')) return;
+      sessionStorage.setItem('pswp-hint-shown', '1');
+
+      const hint = document.createElement('div');
+      hint.className = 'pswp-zoom-hint';
+      hint.textContent = 'Pinch to zoom';
+      lightbox.pswp.element.appendChild(hint);
+
+      setTimeout(function () {
+        hint.classList.add('pswp-zoom-hint--fade');
+        hint.addEventListener('transitionend', function () { hint.remove(); });
+      }, 2000);
+    });
+
+    lightbox.init();
+  </script>
 </body>
 </html>
