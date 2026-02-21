@@ -7,6 +7,8 @@ const CONTENT_DIR = path.join(ROOT, 'content');
 const BUILD_SCRIPT = path.join(ROOT, 'build.js');
 const DEBOUNCE_MS = 300;
 
+const WATCHED_EXTS = new Set(['.md', '.json', '.png', '.jpg', '.jpeg', '.webp', '.gif', '.svg']);
+
 let debounceTimer = null;
 
 function runBuild() {
@@ -29,10 +31,11 @@ function watch() {
   runBuild();
   console.log('Watching content/ — edits will rebuild index.html automatically.\n');
 
-  fs.watch(CONTENT_DIR, (eventType, filename) => {
+  fs.watch(CONTENT_DIR, { recursive: true }, (eventType, filename) => {
     if (!filename) return;
-    const ext = path.extname(filename);
-    if (ext === '.md' || filename === 'meta.json') {
+    const ext = path.extname(filename).toLowerCase();
+    if (WATCHED_EXTS.has(ext)) {
+      console.log(`  Changed: ${filename}`);
       scheduleBuild();
     }
   });

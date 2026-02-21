@@ -499,3 +499,150 @@ main section h4 {
     scroll-margin-top: 3rem;
   }
 }
+
+/* ========================================================================
+   Figure / Image styles
+   ======================================================================== */
+
+.img-figure {
+  margin: 1.5rem 0;
+  padding: 0;
+  text-align: center;
+}
+
+.img-figure img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 4px;
+  cursor: zoom-in;
+  transition: opacity 0.15s ease;
+}
+
+.img-figure img:hover {
+  opacity: 0.9;
+}
+
+.img-figure img:focus-visible {
+  outline: 2px solid var(--color-heading2);
+  outline-offset: 2px;
+}
+
+.img-figure figcaption {
+  margin-top: 0.5rem;
+  font-size: var(--font-small-size);
+  line-height: 1.4;
+  color: #666;
+}
+
+/* ========================================================================
+   Lightbox overlay
+   ======================================================================== */
+
+.lightbox-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 200;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0, 0, 0, 0.85);
+  padding: 1rem;
+}
+
+.lightbox-overlay[hidden] {
+  display: none;
+}
+
+.lightbox-img {
+  max-width: 90vw;
+  max-height: 90vh;
+  object-fit: contain;
+  border-radius: 4px;
+}
+
+.lightbox-close {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  padding: 0;
+  border: none;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.15);
+  color: #fff;
+  cursor: pointer;
+  transition: background 0.15s ease;
+}
+
+.lightbox-close:hover {
+  background: rgba(255, 255, 255, 0.3);
+}
+
+.lightbox-close:focus-visible {
+  outline: 2px solid #fff;
+  outline-offset: 2px;
+}
+
+/* ========================================================================
+   Content list styling (scientific bullet lists)
+   ======================================================================== */
+
+main section ul,
+main section ol {
+  padding-left: 1.5rem;
+  margin: 1rem 0;
+}
+
+main section li {
+  margin-bottom: 0.35rem;
+  line-height: var(--font-body-line-height);
+}
+
+main section li + li {
+  margin-top: 0.25rem;
+}
+
+/* ========================================================================
+   Inline code and code blocks
+   ======================================================================== */
+
+main code {
+  font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace;
+  font-size: 0.9em;
+  padding: 0.15em 0.35em;
+  border-radius: 3px;
+  background: rgba(0, 0, 0, 0.06);
+}
+
+main pre {
+  margin: 1.25rem 0;
+  padding: 1rem;
+  overflow-x: auto;
+  border-radius: 6px;
+  background: rgba(0, 0, 0, 0.06);
+  line-height: 1.5;
+}
+
+main pre code {
+  padding: 0;
+  background: none;
+  font-size: 0.875em;
+}
+
+/* ========================================================================
+   General focus indicators (WCAG)
+   ======================================================================== */
+
+a:focus-visible {
+  outline: 2px solid var(--color-heading2);
+  outline-offset: 2px;
+}
+
+button:focus-visible {
+  outline: 2px solid currentColor;
+  outline-offset: 2px;
+}

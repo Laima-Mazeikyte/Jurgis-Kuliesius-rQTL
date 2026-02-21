@@ -1,6 +1,8 @@
+---
+title: Section 2
+---
+
 ## Section 2
-
-
 
 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla mauris est, suscipit eu dapibus nec, placerat quis mi. Quisque nec aliquet felis. Ut ornare, justo ac iaculis tristique, erat lectus condimentum nunc, ut porta libero magna nec tortor. Phasellus rhoncus venenatis leo, a convallis neque efficitur eu. Integer facilisis lectus vel eleifend dictum. Aliquam eleifend faucibus purus, sed vulputate dolor vehicula vitae. Phasellus molestie accumsan rhoncus. Praesent dapibus at mi quis laoreet. Nulla a neque felis. Phasellus nisl massa, tincidunt ut magna quis, aliquet lobortis neque. Duis convallis enim ut molestie consectetur. Aenean mattis gravida justo et aliquam. Ut lorem tortor, ultrices nec euismod ac, commodo ut turpis.
 

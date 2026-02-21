@@ -1,3 +1,7 @@
+---
+title: The Logic Behind Protein Ratios
+---
+
 ## The logic behind Protein Ratios
 
 Genome-Wide Association Studies (GWAS) have repeatedly scanned the human genome for associations with thousands of protein levels. The approach has successfully identified numerous causal genetic links to disease by bridging the functional gap in post-GWAS analyses via mendelian randomization, colocalization and other statistical approaches. However, by considering each multiplexed protein in isolation, the GWAS fails to shed light on the pathways through which these proteins are mediating their effects. 
@@ -13,3 +17,4 @@ Suppose Protein A has a genetic signal (G) but is buried in environmental noise 
 
 The result is a genetic signal, stripped of the biological noise that previously suppressed it.
 
+![CSF SomaScan 7k](graph-CSF-SomaScan-7k.png)

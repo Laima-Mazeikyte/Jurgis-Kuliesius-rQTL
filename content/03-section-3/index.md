@@ -1,5 +1,8 @@
-## Section 3
+---
+title: Section 3
+---
 
+## Section 3
 
 Suspendisse aliquam eros orci. Pellentesque molestie sagittis quam. Duis eu laoreet felis. Phasellus rhoncus tellus sit amet egestas vulputate. Morbi vitae mauris at felis aliquam viverra. Ut vitae tellus id ante hendrerit dignissim. Etiam sodales tellus vel elit sollicitudin, id cursus nunc dignissim. In congue massa tellus, at eleifend quam rhoncus eu. Maecenas euismod ante at ultrices cursus. Curabitur varius vitae augue ac accumsan.
 
