@@ -34,7 +34,7 @@
   --font-body-family: "Crimson Text", Georgia, serif;
   --font-body-size: 18px;
   --font-body-line-height: 1.5;
-  --color-body: inherit;
+  --color-body: #1a1a1a;
 
   /* Heading 1: site title — 24px (same as heading 2) */
   --font-heading1-family: "Crimson Text", Georgia, serif;
@@ -42,7 +42,7 @@
   --font-heading1-size-mobile: 16px;
   --font-heading1-weight: bold;
   --font-heading1-line-height: 1.25;
-  --color-heading1: #BB0D2E;
+  --color-heading1: var(--color-body);
 
   /* Heading 2: section titles in main content — 24px */
   --font-heading2-family: inherit;
@@ -230,6 +230,11 @@ body {
   opacity: 0.7;
 }
 
+.sidebar-toggle:focus-visible {
+  outline: 2px solid currentColor;
+  outline-offset: 2px;
+}
+
 /* Desktop: position toggle on content area (outside sidebar), so when collapsed there's no strip */
 @media (min-width: 769px) {
   .sidebar-toggle {
@@ -249,6 +254,10 @@ body {
   .content-window {
     padding-left: 3rem;
   }
+}
+
+.sidebar-toggle .sidebar-toggle-label {
+  display: none;
 }
 
 .sidebar-toggle .sidebar-toggle-icon {
@@ -361,12 +370,13 @@ main section h4 {
     min-height: auto;
     flex-shrink: 0;
     flex-direction: row;
-    align-items: center;
+    align-items: stretch;
     background: var(--color-sidebar-bg);
     border-right: none;
     /* Divider: same visual style as desktop (1px edge-to-edge) */
     border-bottom: 1px solid #ddd;
-    grid-template-columns: 1fr 3rem;
+    /* Column 2 auto-sized so Index button can be full touch target (44px+), not squeezed into 3rem */
+    grid-template-columns: 1fr auto;
   }
 
   .sidebar-toggle {
@@ -392,6 +402,9 @@ main section h4 {
   .site-header {
     padding: 0 var(--page-gap);
     border-bottom: none;
+    min-height: 44px;
+    display: flex;
+    align-items: center;
   }
 
   .site-title {
@@ -446,24 +459,35 @@ main section h4 {
     padding: 0 var(--page-gap);
   }
 
+  /* Mobile: Index button — minimum 44×44px touch target (WCAG 2.5.5), room for "Index" + padding */
   .sidebar-toggle {
     flex-shrink: 0;
+    width: auto;
+    min-width: 5.5rem;
+    min-height: 44px;
+    padding: 0.75rem 1.25rem;
+    align-items: center;
+    justify-content: center;
+    font-size: var(--font-nav-label-size);
   }
 
-  /* Mobile: show menu (hamburger) when closed, close (X) when overlay open */
-  .sidebar-toggle .icon-menu {
+  /* Mobile: show "Index" label instead of hamburger/close icons */
+  .sidebar-toggle .sidebar-toggle-label {
     display: block;
+    font-family: var(--font-nav-family);
+    font-size: var(--font-nav-label-size);
+    font-weight: var(--font-nav-label-weight);
+    color: var(--color-body);
+    white-space: nowrap;
   }
-  .sidebar-toggle .icon-close,
+  .sidebar-toggle .sidebar-toggle-icon {
+    display: none;
+  }
+  .sidebar-wrapper.overlay-open .sidebar-toggle .icon-menu,
+  .sidebar-wrapper.overlay-open .sidebar-toggle .icon-close,
   .sidebar-toggle .icon-expand,
   .sidebar-toggle .icon-collapse {
     display: none;
-  }
-  .sidebar-wrapper.overlay-open .sidebar-toggle .icon-menu {
-    display: none;
-  }
-  .sidebar-wrapper.overlay-open .sidebar-toggle .icon-close {
-    display: block;
   }
 
   .content-window {

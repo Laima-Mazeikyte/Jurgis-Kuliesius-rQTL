@@ -9,23 +9,29 @@
     return window.matchMedia('(max-width: 768px)').matches;
   }
 
+  // Set initial accessible state on mobile (Index button, overlay closed)
+  if (isMobile()) {
+    toggle.setAttribute('aria-label', 'Open index');
+    toggle.setAttribute('aria-expanded', 'false');
+  }
+
   function closeOverlay() {
     wrapper.classList.remove('overlay-open');
     toggle.setAttribute('aria-expanded', 'false');
-    if (isMobile()) toggle.setAttribute('aria-label', 'Open menu');
+    if (isMobile()) toggle.setAttribute('aria-label', 'Open index');
   }
 
   function openOverlay() {
     wrapper.classList.add('overlay-open');
     toggle.setAttribute('aria-expanded', 'true');
-    if (isMobile()) toggle.setAttribute('aria-label', 'Close menu');
+    if (isMobile()) toggle.setAttribute('aria-label', 'Close index');
   }
 
   toggle.addEventListener('click', function () {
     if (isMobile()) {
       var isOpen = wrapper.classList.toggle('overlay-open');
       toggle.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
-      toggle.setAttribute('aria-label', isOpen ? 'Close menu' : 'Open menu');
+      toggle.setAttribute('aria-label', isOpen ? 'Close index' : 'Open index');
     } else {
       var isCollapsed = wrapper.classList.toggle('is-collapsed');
       toggle.setAttribute('aria-expanded', isCollapsed ? 'false' : 'true');
@@ -58,10 +64,14 @@
     }
   });
 
-  // Close overlay when resizing to desktop
+  // Close overlay when resizing to desktop; sync Index button state when resizing to mobile
   window.addEventListener('resize', function () {
-    if (!isMobile() && wrapper.classList.contains('overlay-open')) {
-      closeOverlay();
+    if (!isMobile()) {
+      if (wrapper.classList.contains('overlay-open')) closeOverlay();
+    } else {
+      var isOpen = wrapper.classList.contains('overlay-open');
+      toggle.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+      toggle.setAttribute('aria-label', isOpen ? 'Close index' : 'Open index');
     }
   });
 })();
