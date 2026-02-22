@@ -9,6 +9,13 @@
     return window.matchMedia('(max-width: 768px)').matches;
   }
 
+  /** On mobile: scroll so the element sits with offsetFromTop px below the viewport top (breathing room). */
+  function scrollToWithOffset(el, offsetFromTop) {
+    if (!el) return;
+    var y = el.getBoundingClientRect().top + window.pageYOffset - offsetFromTop;
+    window.scrollTo({ top: Math.max(0, y), behavior: 'smooth' });
+  }
+
   // Set initial accessible state on mobile (Index button, overlay closed)
   if (isMobile()) {
     toggle.setAttribute('aria-label', 'Open index');
@@ -47,14 +54,24 @@
     });
   }
 
+  // Sticky bar (44px) + 24px breathing room above section title (must match CSS scroll-margin on mobile)
+  var MOBILE_SCROLL_OFFSET = 44 + 24;
+
   // Clicking #top (site title) scrolls to first section so section title is visible
   document.addEventListener('click', function (e) {
     var link = e.target.closest('a[href="#top"]');
     if (link) {
       e.preventDefault();
-      var firstSection = document.querySelector('main section');
+      var firstSection = document.querySelector('main > details, main > section');
       if (firstSection) {
-        firstSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        if (firstSection.tagName.toLowerCase() === 'details') {
+          firstSection.open = true;
+        }
+        if (isMobile()) {
+          scrollToWithOffset(firstSection, MOBILE_SCROLL_OFFSET);
+        } else {
+          firstSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
       } else {
         window.scrollTo(0, 0);
       }
@@ -63,6 +80,42 @@
       }
     }
   });
+
+  // When clicking a Contents link: on mobile scroll with breathing room; for Intro also open the collapsible
+  if (nav) {
+    nav.addEventListener('click', function (e) {
+      var anchor = e.target.closest('a[href^="#"]');
+      if (!anchor || !anchor.hash) return;
+      var id = anchor.hash.slice(1);
+      if (id === 'top') return; // handled by site-title handler
+
+      var target = id === 'intro' ? document.getElementById('intro') : document.getElementById(id);
+      if (!target) return;
+
+      if (id === 'intro' && target.tagName.toLowerCase() === 'details') {
+        target.open = true;
+      }
+
+      e.preventDefault();
+      if (isMobile()) {
+        scrollToWithOffset(target, MOBILE_SCROLL_OFFSET);
+      } else {
+        target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+      window.history.replaceState(null, '', anchor.hash);
+      if (isMobile() && wrapper.classList.contains('overlay-open')) {
+        closeOverlay();
+      }
+    });
+  }
+
+  // If the page loads with #intro, open the collapsible so content is visible like other sections
+  if (window.location.hash === '#intro') {
+    var introOnLoad = document.getElementById('intro');
+    if (introOnLoad && introOnLoad.tagName.toLowerCase() === 'details') {
+      introOnLoad.open = true;
+    }
+  }
 
   // Close overlay when resizing to desktop; sync Index button state when resizing to mobile
   window.addEventListener('resize', function () {
