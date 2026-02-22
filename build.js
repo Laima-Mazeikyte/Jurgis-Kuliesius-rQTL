@@ -203,11 +203,28 @@ function createRenderer(sectionId, dimensions) {
 // Build HTML
 // ---------------------------------------------------------------------------
 
+// Match first "## Detailed explanation" (case-insensitive, optional spaces)
+const DETAILED_EXPLANATION_RE = /\n##\s+Detailed\s+explanation\s*\n/i;
+
 function buildSectionsHtml(sections, dimensions) {
   const parts = [];
   for (const section of sections) {
     const renderer = createRenderer(section.id, dimensions);
-    const bodyHtml = marked.parse(section.content, { renderer });
+    const contentParts = section.content.split(DETAILED_EXPLANATION_RE, 2);
+    let bodyHtml;
+    if (contentParts.length >= 2) {
+      const mainContent = contentParts[0].replace(/\n+$/, '');
+      const detailedContent = contentParts[1].replace(/^\n+/, '');
+      const mainHtml = marked.parse(mainContent, { renderer });
+      const detailedHtml = marked.parse(detailedContent, { renderer });
+      bodyHtml =
+        mainHtml +
+        '\n<details class="detailed-explanation">\n<summary>Detailed explanation</summary>\n' +
+        detailedHtml +
+        '\n</details>';
+    } else {
+      bodyHtml = marked.parse(section.content, { renderer });
+    }
     parts.push(`      <section id="${section.id}">\n${bodyHtml}\n      </section>`);
   }
   return parts.join('\n\n');
