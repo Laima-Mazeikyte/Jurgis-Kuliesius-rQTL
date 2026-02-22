@@ -62,11 +62,8 @@
     var link = e.target.closest('a[href="#top"]');
     if (link) {
       e.preventDefault();
-      var firstSection = document.querySelector('main > details, main > section');
+      var firstSection = document.querySelector('main > section');
       if (firstSection) {
-        if (firstSection.tagName.toLowerCase() === 'details') {
-          firstSection.open = true;
-        }
         if (isMobile()) {
           scrollToWithOffset(firstSection, MOBILE_SCROLL_OFFSET);
         } else {
@@ -81,7 +78,7 @@
     }
   });
 
-  // When clicking a Contents link: on mobile scroll with breathing room; for Intro also open the collapsible
+  // When clicking a Contents link: on mobile scroll with breathing room
   if (nav) {
     nav.addEventListener('click', function (e) {
       var anchor = e.target.closest('a[href^="#"]');
@@ -89,12 +86,8 @@
       var id = anchor.hash.slice(1);
       if (id === 'top') return; // handled by site-title handler
 
-      var target = id === 'intro' ? document.getElementById('intro') : document.getElementById(id);
+      var target = document.getElementById(id);
       if (!target) return;
-
-      if (id === 'intro' && target.tagName.toLowerCase() === 'details') {
-        target.open = true;
-      }
 
       e.preventDefault();
       if (isMobile()) {
@@ -107,14 +100,6 @@
         closeOverlay();
       }
     });
-  }
-
-  // If the page loads with #intro, open the collapsible so content is visible like other sections
-  if (window.location.hash === '#intro') {
-    var introOnLoad = document.getElementById('intro');
-    if (introOnLoad && introOnLoad.tagName.toLowerCase() === 'details') {
-      introOnLoad.open = true;
-    }
   }
 
   // Close overlay when resizing to desktop; sync Index button state when resizing to mobile

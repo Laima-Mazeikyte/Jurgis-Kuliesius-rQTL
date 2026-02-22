@@ -323,52 +323,6 @@ main section {
   scroll-margin-top: 24px;
 }
 
-/* Collapsible intro section (details/summary), collapsed by default */
-main .collapsible-section {
-  margin-bottom: 2rem;
-  scroll-margin-top: 24px;
-}
-
-main .collapsible-section summary {
-  cursor: pointer;
-  list-style: none;
-  display: block;
-}
-
-main .collapsible-section summary::-webkit-details-marker {
-  display: none;
-}
-
-/* Uses: --font-heading2-* (same as section h2) */
-main .collapsible-section summary h2 {
-  margin: 0;
-  font-family: var(--font-heading2-family);
-  font-size: var(--font-heading2-size);
-  font-weight: var(--font-heading2-weight);
-  line-height: var(--font-heading2-line-height);
-  color: var(--color-heading2);
-}
-
-main .collapsible-section summary:focus-visible {
-  outline: 2px solid var(--color-heading2);
-  outline-offset: 2px;
-}
-
-main .collapsible-section .collapsible-section-body {
-  margin-top: 0.5rem;
-}
-
-main .collapsible-section .collapsible-section-body p {
-  font-size: var(--font-paragraph-size);
-  line-height: var(--font-paragraph-line-height);
-  color: var(--color-paragraph);
-  margin: 1rem 0 0;
-}
-
-main .collapsible-section .collapsible-section-body p:first-child {
-  margin-top: 0;
-}
-
 /* Uses: --font-heading2-* */
 main section h2 {
   margin: 0 0 0.5rem;
@@ -541,8 +495,7 @@ main section h4 {
   }
 
   /* Section title below sticky bar with 24px breathing room above the title */
-  main section,
-  main .collapsible-section {
+  main section {
     /* Sticky bar (min 44px) + 24px gap so the title has space at the top */
     scroll-margin-top: calc(44px + 24px);
   }
