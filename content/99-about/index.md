@@ -10,17 +10,19 @@ The work was conducted by the Cruchaga Lab at Washington University in St. Louis
 
 ![Poster](Multi-Tissue-Ratio-Proteogenomics-for-Pathway-Discovery.png)
 
-### Lead Analyst:
+**Lead Analyst:** <br>
 Jurgis Kuliesius, PhD
 
-### Principal Investigator:
+**Principal Investigator:** <br>
 Prof. Carlos Cruchaga, PhD
 
-### Collaborators:
-Gao Wang, PhD (Asst. Prof, Columbia University) - Statistical methodology;
-Matthew Johnson, MS; Cyril Pottier, PhD (Asst. Prof.) - Genetics data;
-Menghan Liu, MS; Katherine Gong, MS - Phenotypic data.
-
+**Collaborators:** <br>
+Gao Wang, PhD (Asst. Prof, Columbia University) - Statistical methodology <br>
+Matthew Johnson, MS - Genetics data <br>
+Cyril Pottier, PhD (Asst. Prof.) - Genetics data <br>
+Menghan Liu, MS - Phenotypic data <br>
+Katherine Gong, MS - Phenotypic data <br>
+<br>
 ::: details How to cite?
 Please refer to the accompanying abstract/poster:
 > Kuliesius, J., et al. "Multi-tissue Ratio Proteogenomics for Pathway Discovery." Poster P17.18LB, US HUPO Conference 2026.
