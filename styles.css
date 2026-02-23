@@ -50,6 +50,8 @@
   --font-heading2-weight: bold;
   --font-heading2-line-height: 1.25;
   --color-heading2: #BB0D2E;
+  /* Links: darker than heading2, thick underline */
+  --color-link: #8B0A22;
 
   /* Paragraph: 18px (inherits from body) */
   --font-paragraph-size: inherit;
@@ -348,6 +350,17 @@ main section p {
   font-size: var(--font-paragraph-size);
   line-height: var(--font-paragraph-line-height);
   color: rgba(48, 48, 48, 1);
+}
+
+/* Links in main content: darker h2 color, thick underline */
+main section a {
+  color: var(--color-link);
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.2em;
+}
+main section a:hover {
+  color: var(--color-heading2);
 }
 
 /* Uses: --font-heading3-* */
