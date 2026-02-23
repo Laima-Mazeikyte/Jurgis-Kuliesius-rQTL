@@ -1,13 +1,12 @@
 ---
-title: Section 3
+title: "Case Study: TREM2 / TREM2 signal in blood plasma"
 ---
 
-## Section 3
+## Case Study: TREM2 / TREM2 signal in blood plasma
 
-Suspendisse aliquam eros orci. Pellentesque molestie sagittis quam. Duis eu laoreet felis. Phasellus rhoncus tellus sit amet egestas vulputate. Morbi vitae mauris at felis aliquam viverra. Ut vitae tellus id ante hendrerit dignissim. Etiam sodales tellus vel elit sollicitudin, id cursus nunc dignissim. In congue massa tellus, at eleifend quam rhoncus eu. Maecenas euismod ante at ultrices cursus. Curabitur varius vitae augue ac accumsan.
+We measured the protein TREM2 using two different probes (SomaScan aptamers) in the same cohort in plasma samples. As expected, the two protein abundance measurements were highly correlated (r = 0.81), indicating they were both detecting the same broad differences in TREM2 abundance. However, when we analyzed the ratio of these two measurements (*Probe 16300-4 / Probe 5635-66*), the genetic signal at the TREM2 locus became stronger than for either measurement alone.
 
-Aliquam non felis velit. Fusce quis massa vitae quam dignissim suscipit. Integer blandit quis nisl convallis dapibus. Maecenas interdum lacus est, nec finibus sem lobortis consequat. Aliquam congue, diam vel auctor mollis, leo mi porta leo, at dignissim ipsum tellus non massa. Etiam volutpat vel lectus nec posuere. Praesent vulputate libero ac fermentum vulputate. Pellentesque elementum mauris nec scelerisque efficitur. Etiam in arcu a libero volutpat vulputate id id lectus. Aenean at purus leo. Nulla eget ipsum at dui sollicitudin dictum. Curabitur ut convallis elit.
+Counterintuitively, taking the ratio of two measurements for the same protein acts as a powerful "noise filter."
 
-Pellentesque pellentesque pulvinar luctus. Sed vulputate risus elit, sed sodales sapien sollicitudin id. Donec lacinia ac neque quis mollis. In interdum, leo a placerat feugiat, orci massa pellentesque dolor, sed gravida orci ipsum tristique erat. Vestibulum tempor augue nibh. Nam quis dui dignissim, hendrerit risus non, molestie neque. Nam dui dui, consequat sit amet ullamcorper quis, rutrum in enim. Sed sit amet magna dictum, aliquam tortor ac, ornare felis. Quisque gravida tincidunt tortor, eget facilisis elit scelerisque a. Ut turpis tellus, accumsan eu cursus eget, imperdiet ac augue. Suspendisse eget commodo quam. Aenean quis libero maximus, maximus magna nec, vulputate tellus. Vivamus magna enim, lacinia suscipit luctus in, tempor ac sem.
-
-Mauris scelerisque fringilla diam, maximus efficitur leo dignissim vel. Sed hendrerit rutrum lacus, porta maximus neque pharetra vitae. Sed sed magna enim. Curabitur bibendum metus vitae enim rhoncus, ut ornare nibh fermentum. Donec neque urna, cursus id enim sed, tristique egestas neque. Sed nec ultrices leo. Nam volutpat nisl et enim vehicula ullamcorper. Suspendisse pharetra nulla nec tellus pharetra convallis. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. 
+* **Canceling Abundance:** Both probes capture the total amount of protein driven by non-genetic factors either biological (inflammation or clearance rates) or technical (sampling handling variability). Forming a ratio of the two protein measurements removes this shared variation.
+* **Revealing Structure:** What remains in the ratio is the difference between the two probes. This creates a detector for genetic variants that alter the protein's physical structure (epitopes) or isoform composition, affecting how well one probe binds the target compared to the other.
