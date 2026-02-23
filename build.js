@@ -203,28 +203,68 @@ function createRenderer(sectionId, dimensions) {
 // Build HTML
 // ---------------------------------------------------------------------------
 
-// Match first "## Detailed explanation" (case-insensitive, optional spaces)
-const DETAILED_EXPLANATION_RE = /\n##\s+Detailed\s+explanation\s*\n/i;
+// Fenced block: opening line "::: details Title" (optional space after colons), body until closing ":::"
+const DETAILS_OPEN_RE = /(?:^|\n)(:::+\s*details\s+([^\n]*))\s*\n/im;
+const DETAILS_CLOSE_RE = /\n:::+\s*(?=\n|$)/;
+
+/**
+ * Extract ::: details Title ... ::: blocks from content. Returns modified content
+ * with placeholders and an array of { title, body }. Supports multiple blocks.
+ */
+function extractDetailsBlocks(content) {
+  const blocks = [];
+  let modified = content;
+  let index = 0;
+
+  while (true) {
+    const openMatch = modified.match(DETAILS_OPEN_RE);
+    if (!openMatch) break;
+
+    const blockStart = openMatch.index;
+    const bodyStart = blockStart + openMatch[0].length;
+    const tail = modified.slice(bodyStart);
+    const closeMatch = tail.match(DETAILS_CLOSE_RE);
+
+    let body;
+    let blockEnd;
+
+    if (closeMatch) {
+      body = tail.slice(0, closeMatch.index).trim();
+      blockEnd = bodyStart + closeMatch.index + closeMatch[0].length;
+    } else {
+      body = tail.trim();
+      blockEnd = modified.length;
+    }
+
+    const title = (openMatch[2] || '').trim() || 'Details';
+    blocks.push({ title, body });
+    const placeholder = `\n<!--DETAILS_${index}-->\n`;
+    modified = modified.slice(0, blockStart) + placeholder + modified.slice(blockEnd);
+    index += 1;
+  }
+
+  return { content: modified, blocks };
+}
 
 function buildSectionsHtml(sections, dimensions) {
   const parts = [];
   for (const section of sections) {
     const renderer = createRenderer(section.id, dimensions);
-    const contentParts = section.content.split(DETAILED_EXPLANATION_RE, 2);
-    let bodyHtml;
-    if (contentParts.length >= 2) {
-      const mainContent = contentParts[0].replace(/\n+$/, '');
-      const detailedContent = contentParts[1].replace(/^\n+/, '');
-      const mainHtml = marked.parse(mainContent, { renderer });
-      const detailedHtml = marked.parse(detailedContent, { renderer });
-      bodyHtml =
-        mainHtml +
-        '\n<details class="detailed-explanation">\n<summary>Detailed explanation</summary>\n' +
+    const { content: contentWithoutBlocks, blocks } = extractDetailsBlocks(section.content);
+    let bodyHtml = marked.parse(contentWithoutBlocks, { renderer });
+
+    for (let i = 0; i < blocks.length; i++) {
+      const block = blocks[i];
+      const detailedHtml = marked.parse(block.body, { renderer });
+      const detailsHtml =
+        '\n<details class="detailed-explanation">\n<summary>' +
+        escapeHtml(block.title) +
+        '</summary>\n' +
         detailedHtml +
-        '\n</details>';
-    } else {
-      bodyHtml = marked.parse(section.content, { renderer });
+        '\n</details>\n';
+      bodyHtml = bodyHtml.replace(`<!--DETAILS_${i}-->`, detailsHtml);
     }
+
     parts.push(`      <section id="${section.id}">\n${bodyHtml}\n      </section>`);
   }
   return parts.join('\n\n');
