@@ -3,8 +3,8 @@
 /*
   Typography token usage (which areas use what):
   --font-body-*           → body, .content-window; base for main content
-  --font-heading1-*       → .site-title (sidebar site title)
-  --font-heading2-*       → main section h2 (section titles in content)
+  --font-heading1-*       → (sidebar .site-title uses --font-nav-list-size + bold instead)
+  --font-heading2-*       → main .page-title (site title H1), main section h2 (section titles)
   --font-paragraph-*      → main section p
   --font-nav-*            → .sidebar-wrapper (sidebar/nav font family)
   --font-nav-label-*      → .sidebar-nav-title ("Contents" label)
@@ -38,8 +38,8 @@
 
   /* Heading 1: site title — 24px (same as heading 2) */
   --font-heading1-family: "Crimson Text", Georgia, serif;
-  --font-heading1-size: 24px;
-  --font-heading1-size-mobile: 16px;
+  --font-heading1-size: 48px;
+  --font-heading1-size-mobile: 32px;
   --font-heading1-weight: bold;
   --font-heading1-line-height: 1.25;
   --color-heading1: var(--color-body);
@@ -148,12 +148,12 @@ body {
   }
 }
 
-/* Uses: --font-heading1-* */
+/* Same font size as index links (--font-nav-list-size), bold */
 .site-title {
   margin: 0;
   font-family: var(--font-heading1-family);
-  font-size: var(--font-heading1-size);
-  font-weight: var(--font-heading1-weight);
+  font-size: var(--font-nav-list-size);
+  font-weight: bold;
   line-height: var(--font-heading1-line-height);
   color: var(--color-heading1);
 }
@@ -305,6 +305,16 @@ body {
 main {
   flex: 1;
   padding: var(--content-top-padding) var(--page-gap) var(--page-gap);
+}
+
+/* Page title (site title as H1 at top of content) */
+main .page-title {
+  margin: 0 0 1.5rem;
+  font-family: var(--font-heading1-family);
+  font-size: var(--font-heading1-size);
+  font-weight: var(--font-heading1-weight);
+  line-height: var(--font-heading1-line-height);
+  color: var(--color-body);
 }
 
 /* Desktop: main content stays 700px until container is too small, then it resizes */
@@ -492,7 +502,6 @@ main section blockquote {
   }
 
   .site-title {
-    font-size: var(--font-heading1-size-mobile);
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;

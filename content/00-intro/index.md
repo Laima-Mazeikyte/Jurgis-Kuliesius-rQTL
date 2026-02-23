@@ -1,8 +1,8 @@
 ---
-title: Study design & rationale
+title: Study Design & Rationale
 ---
 
-## Study design & rationale
+## Study Design & Rationale
 
 Genome-Wide Association Studies (GWAS) have repeatedly scanned the human genome for associations with thousands of protein levels. The approach has successfully identified numerous causal genetic links to disease by bridging the functional gap in post-GWAS analyses via mendelian randomization, colocalization and other statistical approaches.
 

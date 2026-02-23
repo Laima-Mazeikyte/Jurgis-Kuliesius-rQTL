@@ -63,3 +63,12 @@ Proteins rarely function in isolation. Instead, they fluctuate together in respo
 
 **Opposing Genetic Effects:**
 In rarer cases, the genetic variant affects both proteins but in opposite directions — increasing Protein A while decreasing Protein B. Because the genetic effects have opposite signs, the composite signal becomes stronger than either protein shows on its own. This would point to a direct functional relationship, such as a substrate-product pair where the variant affects the enzyme converting one to the other.
+
+::: details Visualizing the Effect Direction and Signal Gain
+
+![Beta scatter graph, CSF SomaScan 7k](Beta-scatter-graph-CSF-SomaScan-7k.png)
+
+This scatter plot confirms the opposing direction of the genetic effect as an important predictor of success for ratio analysis. Each dot represents a particular genome-wide significant genetic variant tested in a protein pair. The X-axis is the effect on Protein A and the Y-axis is the effect on Protein B. The color indicates the result: blue dots represent a gain in statistical signal for the rQTL (a stronger p-value), while red dots represent a loss or dilution of signal, when compared to the best pQTL in the ratio.
+
+Significant rQTL (blue) cluster in the top-left and bottom-right "opposite sign" zones. Here, the genetic variant is linked with increasing one protein’s abundance while decreasing the other (e.g., Protein A goes up, Protein B goes down). As predicted in the Opposing Genetic Effects scenario above, when the genetics push the two proteins in opposite directions, the ratio amplifies this contrast, resulting in net signal gain.
+:::

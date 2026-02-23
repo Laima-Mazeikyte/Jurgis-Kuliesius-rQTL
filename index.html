@@ -15,15 +15,15 @@
   <div class="sidebar-wrapper" id="sidebar-wrapper">
     <aside class="sidebar" id="nav-index" aria-label="Navigation">
       <header class="site-header">
-        <h1 class="site-title"><a href="#top">Microglial rQTL</a></h1>
+        <div class="site-title"><a href="#top">Microglial rQTL</a></div>
       </header>
       <nav class="sidebar-nav">
         <h2 class="sidebar-nav-title">Contents</h2>
         <ol class="sidebar-nav-list">
-          <li><a href="#intro">Study design &amp; rationale</a></li>
+          <li><a href="#intro">Study Design &amp; Rationale</a></li>
           <li><a href="#protein-ratios">The Logic Behind Protein Ratios</a></li>
-          <li><a href="#section-2">Section 2</a></li>
-          <li><a href="#section-3">Section 3</a></li>
+          <li><a href="#section-2">Ratios of the Microglial Proteome</a></li>
+          <li><a href="#section-3">Case Study: TREM2 / TREM2 signal in blood plasma</a></li>
           <li><a href="#about">About</a></li>
         </ol>
       </nav>
@@ -41,8 +41,9 @@
 
   <div class="content-window" id="top">
     <main>
+      <h1 class="page-title">{{siteTitle}}</h1>
       <section id="intro">
-<h2>Study design &amp; rationale</h2>
+<h2>Study Design &amp; Rationale</h2>
 <p>Genome-Wide Association Studies (GWAS) have repeatedly scanned the human genome for associations with thousands of protein levels. The approach has successfully identified numerous causal genetic links to disease by bridging the functional gap in post-GWAS analyses via mendelian randomization, colocalization and other statistical approaches.</p>
 
 <details class="detailed-explanation">
@@ -110,24 +111,51 @@ Proteins rarely function in isolation. Instead, they fluctuate together in respo
 <p><strong>Opposing Genetic Effects:</strong>
 In rarer cases, the genetic variant affects both proteins but in opposite directions — increasing Protein A while decreasing Protein B. Because the genetic effects have opposite signs, the composite signal becomes stronger than either protein shows on its own. This would point to a direct functional relationship, such as a substrate-product pair where the variant affects the enzyme converting one to the other.</p>
 
+<details class="detailed-explanation">
+<summary><span class="details-summary-text">Visualizing the Effect Direction and Signal Gain</span><svg class="details-chevron-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M9 18l6-6-6-6"/></svg></summary>
+<p><figure class="img-figure has-caption">
+  <a href="images/protein-ratios/Beta-scatter-graph-CSF-SomaScan-7k-full.png" data-pswp-width="1942" data-pswp-height="1714" target="_blank" aria-label="Open image: Beta scatter graph, CSF SomaScan 7k">
+    <img src="images/protein-ratios/Beta-scatter-graph-CSF-SomaScan-7k-full.png" alt="Beta scatter graph, CSF SomaScan 7k" loading="lazy" />
+  </a>
+  <figcaption>Beta scatter graph, CSF SomaScan 7k</figcaption>
+</figure></p>
+<p>This scatter plot confirms the opposing direction of the genetic effect as an important predictor of success for ratio analysis. Each dot represents a particular genome-wide significant genetic variant tested in a protein pair. The X-axis is the effect on Protein A and the Y-axis is the effect on Protein B. The color indicates the result: blue dots represent a gain in statistical signal for the rQTL (a stronger p-value), while red dots represent a loss or dilution of signal, when compared to the best pQTL in the ratio.</p>
+<p>Significant rQTL (blue) cluster in the top-left and bottom-right &quot;opposite sign&quot; zones. Here, the genetic variant is linked with increasing one protein’s abundance while decreasing the other (e.g., Protein A goes up, Protein B goes down). As predicted in the Opposing Genetic Effects scenario above, when the genetics push the two proteins in opposite directions, the ratio amplifies this contrast, resulting in net signal gain.</p>
+
+</details>
+
+
       </section>
 
       <section id="section-2">
-<h2>Section 2</h2>
-<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla mauris est, suscipit eu dapibus nec, placerat quis mi. Quisque nec aliquet felis. Ut ornare, justo ac iaculis tristique, erat lectus condimentum nunc, ut porta libero magna nec tortor. Phasellus rhoncus venenatis leo, a convallis neque efficitur eu. Integer facilisis lectus vel eleifend dictum. Aliquam eleifend faucibus purus, sed vulputate dolor vehicula vitae. Phasellus molestie accumsan rhoncus. Praesent dapibus at mi quis laoreet. Nulla a neque felis. Phasellus nisl massa, tincidunt ut magna quis, aliquet lobortis neque. Duis convallis enim ut molestie consectetur. Aenean mattis gravida justo et aliquam. Ut lorem tortor, ultrices nec euismod ac, commodo ut turpis.</p>
-<p>Suspendisse aliquam eros orci. Pellentesque molestie sagittis quam. Duis eu laoreet felis. Phasellus rhoncus tellus sit amet egestas vulputate. Morbi vitae mauris at felis aliquam viverra. Ut vitae tellus id ante hendrerit dignissim. Etiam sodales tellus vel elit sollicitudin, id cursus nunc dignissim. In congue massa tellus, at eleifend quam rhoncus eu. Maecenas euismod ante at ultrices cursus. Curabitur varius vitae augue ac accumsan.</p>
-<p>Aliquam non felis velit. Fusce quis massa vitae quam dignissim suscipit. Integer blandit quis nisl convallis dapibus. Maecenas interdum lacus est, nec finibus sem lobortis consequat. Aliquam congue, diam vel auctor mollis, leo mi porta leo, at dignissim ipsum tellus non massa. Etiam volutpat vel lectus nec posuere. Praesent vulputate libero ac fermentum vulputate. Pellentesque elementum mauris nec scelerisque efficitur. Etiam in arcu a libero volutpat vulputate id id lectus. Aenean at purus leo. Nulla eget ipsum at dui sollicitudin dictum. Curabitur ut convallis elit.</p>
-<p>Pellentesque pellentesque pulvinar luctus. Sed vulputate risus elit, sed sodales sapien sollicitudin id. Donec lacinia ac neque quis mollis. In interdum, leo a placerat feugiat, orci massa pellentesque dolor, sed gravida orci ipsum tristique erat. Vestibulum tempor augue nibh. Nam quis dui dignissim, hendrerit risus non, molestie neque. Nam dui dui, consequat sit amet ullamcorper quis, rutrum in enim. Sed sit amet magna dictum, aliquam tortor ac, ornare felis. Quisque gravida tincidunt tortor, eget facilisis elit scelerisque a. Ut turpis tellus, accumsan eu cursus eget, imperdiet ac augue. Suspendisse eget commodo quam. Aenean quis libero maximus, maximus magna nec, vulputate tellus. Vivamus magna enim, lacinia suscipit luctus in, tempor ac sem.</p>
-<p>Mauris scelerisque fringilla diam, maximus efficitur leo dignissim vel. Sed hendrerit rutrum lacus, porta maximus neque pharetra vitae. Sed sed magna enim. Curabitur bibendum metus vitae enim rhoncus, ut ornare nibh fermentum. Donec neque urna, cursus id enim sed, tristique egestas neque. Sed nec ultrices leo. Nam volutpat nisl et enim vehicula ullamcorper. Suspendisse pharetra nulla nec tellus pharetra convallis. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. </p>
+<h2>Ratios of the Microglial Proteome</h2>
+<p>In this study, we compared rQTL results from cerebrospinal fluid and blood plasma, revealing a fundamental difference in how Alzheimer&#39;s disease-associated microglia proteins are regulated in their native environment (CSF) versus the periphery (blood plasma). The two cohorts share similar sample sizes (1,888 for CSF vs. 2,150 for plasma), identical European ancestry, and the same multiplex proteomic technology (SomaScan 7k). Furthermore, every protein measurement was genetically validated to possess a cis pQTL within its respective tissue. Despite these consistencies, the CSF results (<em>CSF graph</em>) demonstrate a highly interconnected proteomic network that is absent in plasma (<em>Plasma graph</em>). </p>
+<p><figure class="img-figure has-caption">
+  <a href="images/section-2/graph-CSF-SomaScan-7k-full.png" data-pswp-width="3029" data-pswp-height="1672" target="_blank" aria-label="Open image: CSF">
+    <img src="images/section-2/graph-CSF-SomaScan-7k-full.png" alt="CSF" loading="lazy" />
+  </a>
+  <figcaption>CSF</figcaption>
+</figure>
+<figure class="img-figure has-caption">
+  <a href="images/section-2/graph-Plasma-SomaScan-7k-full.png" data-pswp-width="3023" data-pswp-height="1664" target="_blank" aria-label="Open image: Plasma">
+    <img src="images/section-2/graph-Plasma-SomaScan-7k-full.png" alt="Plasma" loading="lazy" />
+  </a>
+  <figcaption>Plasma</figcaption>
+</figure></p>
+<p>Of the 78 tested protein ratios in CSF, 30 (38%) showcase either symmetric or asymmetric gain in signal, indicating that in the central nervous system these proteins fluctuate in coordination with one another. Consequently, forming ratios in CSF frequently succeeds in removing shared biological &quot;noise” (i.e. common inflammatory states or microglial activation levels), thereby increasing the power to detect these variants compared to single-protein analyses.</p>
+<p>In sharp contrast, performing the same analysis in blood plasma (Graph B) exhibits a near-total collapse of this network structure. The plasma analysis had a greater set of potential targets testing 105 ratios, compared to 78 in CSF, given a higher number of protein measurements possessing single protein cis-variants (15 vs 13). Despite 8 of these 15 measurements overlapping between the two tissues, the ratios failed to improve the QTL signal strength in all but 3 instances (3%). Notably, 2 of these overlapped with CSF results and the ratio between the two separate TREM2 assays was not tested due to the lack of a cis signal in the secondary measurement. While strong single-protein signals exist in isolation in blood plasma, they do not share the systematic variance with other microglia proteins required for a ratio to generate a p-gain.</p>
+<p>This suggests that while most microglial proteins are detectable in plasma, they likely originate as cellular leakage or uncoupled debris rather than as part of a coordinated biological response. In CSF, the proteins often behave as a system, where Protein A serves as a valid proxy for the environmental noise affecting Protein B. In plasma, these same proteins appear to fluctuate independently, governed by clearance rates or peripheral noise rather than shared regulation and disease pathways. Therefore, constructing ratios in plasma predominantly introduces the unique noise of the second protein without subtracting any shared variance, diluting the original genetic signals rather than enhancing them.</p>
 
       </section>
 
       <section id="section-3">
-<h2>Section 3</h2>
-<p>Suspendisse aliquam eros orci. Pellentesque molestie sagittis quam. Duis eu laoreet felis. Phasellus rhoncus tellus sit amet egestas vulputate. Morbi vitae mauris at felis aliquam viverra. Ut vitae tellus id ante hendrerit dignissim. Etiam sodales tellus vel elit sollicitudin, id cursus nunc dignissim. In congue massa tellus, at eleifend quam rhoncus eu. Maecenas euismod ante at ultrices cursus. Curabitur varius vitae augue ac accumsan.</p>
-<p>Aliquam non felis velit. Fusce quis massa vitae quam dignissim suscipit. Integer blandit quis nisl convallis dapibus. Maecenas interdum lacus est, nec finibus sem lobortis consequat. Aliquam congue, diam vel auctor mollis, leo mi porta leo, at dignissim ipsum tellus non massa. Etiam volutpat vel lectus nec posuere. Praesent vulputate libero ac fermentum vulputate. Pellentesque elementum mauris nec scelerisque efficitur. Etiam in arcu a libero volutpat vulputate id id lectus. Aenean at purus leo. Nulla eget ipsum at dui sollicitudin dictum. Curabitur ut convallis elit.</p>
-<p>Pellentesque pellentesque pulvinar luctus. Sed vulputate risus elit, sed sodales sapien sollicitudin id. Donec lacinia ac neque quis mollis. In interdum, leo a placerat feugiat, orci massa pellentesque dolor, sed gravida orci ipsum tristique erat. Vestibulum tempor augue nibh. Nam quis dui dignissim, hendrerit risus non, molestie neque. Nam dui dui, consequat sit amet ullamcorper quis, rutrum in enim. Sed sit amet magna dictum, aliquam tortor ac, ornare felis. Quisque gravida tincidunt tortor, eget facilisis elit scelerisque a. Ut turpis tellus, accumsan eu cursus eget, imperdiet ac augue. Suspendisse eget commodo quam. Aenean quis libero maximus, maximus magna nec, vulputate tellus. Vivamus magna enim, lacinia suscipit luctus in, tempor ac sem.</p>
-<p>Mauris scelerisque fringilla diam, maximus efficitur leo dignissim vel. Sed hendrerit rutrum lacus, porta maximus neque pharetra vitae. Sed sed magna enim. Curabitur bibendum metus vitae enim rhoncus, ut ornare nibh fermentum. Donec neque urna, cursus id enim sed, tristique egestas neque. Sed nec ultrices leo. Nam volutpat nisl et enim vehicula ullamcorper. Suspendisse pharetra nulla nec tellus pharetra convallis. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. </p>
+<h2>Case Study: TREM2 / TREM2 signal in blood plasma</h2>
+<p>We measured the protein TREM2 using two different probes (SomaScan aptamers) in the same cohort in plasma samples. As expected, the two protein abundance measurements were highly correlated (r = 0.81), indicating they were both detecting the same broad differences in TREM2 abundance. However, when we analyzed the ratio of these two measurements (<em>Probe 16300-4 / Probe 5635-66</em>), the genetic signal at the TREM2 locus became stronger than for either measurement alone.</p>
+<p>Counterintuitively, taking the ratio of two measurements for the same protein acts as a powerful &quot;noise filter.&quot;</p>
+<ul>
+<li><strong>Canceling Abundance:</strong> Both probes capture the total amount of protein driven by non-genetic factors either biological (inflammation or clearance rates) or technical (sampling handling variability). Forming a ratio of the two protein measurements removes this shared variation.</li>
+<li><strong>Revealing Structure:</strong> What remains in the ratio is the difference between the two probes. This creates a detector for genetic variants that alter the protein&#39;s physical structure (epitopes) or isoform composition, affecting how well one probe binds the target compared to the other.</li>
+</ul>
 
       </section>
 
