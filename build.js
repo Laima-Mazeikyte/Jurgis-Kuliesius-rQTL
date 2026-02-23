@@ -255,7 +255,13 @@ function buildSectionsHtml(sections, dimensions) {
 
     for (let i = 0; i < blocks.length; i++) {
       const block = blocks[i];
-      const detailedHtml = marked.parse(block.body, { renderer });
+      let detailedHtml = marked.parse(block.body, { renderer });
+      if (section.id === 'about' && block.title === 'How to cite?') {
+        detailedHtml = detailedHtml.replace(
+          /<blockquote>([\s\S]*?)<\/blockquote>/,
+          '<div class="citation-blockquote-wrapper"><blockquote>$1<button type="button" class="citation-copy-btn" aria-label="Copy citation">Copy</button></blockquote></div>'
+        );
+      }
       const detailsHtml =
         '\n<details class="detailed-explanation">\n<summary>' +
         '<span class="details-summary-text">' + escapeHtml(block.title) + '</span>' +

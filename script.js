@@ -114,3 +114,38 @@
   });
 })();
 
+// Citation copy button: copy blockquote text to clipboard
+(function () {
+  var wrapper = document.querySelector('#about .citation-blockquote-wrapper');
+  if (!wrapper) return;
+  var blockquote = wrapper.querySelector('blockquote');
+  var btn = wrapper.querySelector('.citation-copy-btn');
+  if (!blockquote || !btn) return;
+
+  function getCitationText() {
+    var clone = blockquote.cloneNode(true);
+    var btnClone = clone.querySelector('.citation-copy-btn');
+    if (btnClone) btnClone.remove();
+    return clone.textContent.trim();
+  }
+  var citationText = getCitationText();
+
+  btn.addEventListener('click', function () {
+    if (!navigator.clipboard || !navigator.clipboard.writeText) {
+      return;
+    }
+    navigator.clipboard.writeText(citationText).then(
+      function () {
+        var label = btn.getAttribute('aria-label');
+        btn.textContent = 'Copied!';
+        btn.setAttribute('aria-label', 'Citation copied');
+        setTimeout(function () {
+          btn.textContent = 'Copy';
+          if (label) btn.setAttribute('aria-label', label);
+        }, 1500);
+      },
+      function () {}
+    );
+  });
+})();
+
