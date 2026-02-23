@@ -174,14 +174,17 @@ In rarer cases, the genetic variant affects both proteins but in opposite direct
   </a>
   <figcaption>Poster</figcaption>
 </figure></p>
-<h3>Lead Analyst:</h3>
-<p>Jurgis Kuliesius, PhD</p>
-<h3>Principal Investigator:</h3>
-<p>Prof. Carlos Cruchaga, PhD</p>
-<h3>Collaborators:</h3>
-<p>Gao Wang, PhD (Asst. Prof, Columbia University) - Statistical methodology;
-Matthew Johnson, MS; Cyril Pottier, PhD (Asst. Prof.) - Genetics data;
-Menghan Liu, MS; Katherine Gong, MS - Phenotypic data.</p>
+<p><strong>Lead Analyst:</strong> <br>
+Jurgis Kuliesius, PhD</p>
+<p><strong>Principal Investigator:</strong> <br>
+Prof. Carlos Cruchaga, PhD</p>
+<p><strong>Collaborators:</strong> <br>
+Gao Wang, PhD (Asst. Prof, Columbia University) - Statistical methodology <br>
+Matthew Johnson, MS - Genetics data <br>
+Cyril Pottier, PhD (Asst. Prof.) - Genetics data <br>
+Menghan Liu, MS - Phenotypic data <br>
+Katherine Gong, MS - Phenotypic data <br>
+<br></p>
 
 <details class="detailed-explanation">
 <summary><span class="details-summary-text">How to cite?</span><svg class="details-chevron-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M9 18l6-6-6-6"/></svg></summary>
@@ -222,6 +225,17 @@ Menghan Liu, MS; Katherine Gong, MS - Phenotypic data.</p>
       imageClickAction: 'zoom',
       padding: { top: 20, bottom: 20, left: 0, right: 0 },
       closeOnVerticalDrag: true,
+    });
+
+    // Back button: close lightbox instead of leaving the page
+    lightbox.on('beforeOpen', function () {
+      history.pushState({ pswp: true }, '', window.location.href);
+    });
+    lightbox.on('close', function () {
+      if (history.state && history.state.pswp) history.back();
+    });
+    window.addEventListener('popstate', function () {
+      if (lightbox.pswp && typeof lightbox.pswp.close === 'function') lightbox.pswp.close();
     });
 
     lightbox.on('openingAnimationEnd', function () {

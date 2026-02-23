@@ -61,6 +61,17 @@
       closeOnVerticalDrag: true,
     });
 
+    // Back button: close lightbox instead of leaving the page
+    lightbox.on('beforeOpen', function () {
+      history.pushState({ pswp: true }, '', window.location.href);
+    });
+    lightbox.on('close', function () {
+      if (history.state && history.state.pswp) history.back();
+    });
+    window.addEventListener('popstate', function () {
+      if (lightbox.pswp && typeof lightbox.pswp.close === 'function') lightbox.pswp.close();
+    });
+
     lightbox.on('openingAnimationEnd', function () {
       if (!('ontouchstart' in window)) return;
       if (sessionStorage.getItem('pswp-hint-shown')) return;
