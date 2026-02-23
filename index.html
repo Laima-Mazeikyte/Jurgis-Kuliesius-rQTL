@@ -7,7 +7,7 @@
   <title>Document</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Crimson+Text:ital,wght@0,400;0,600;0,700&family=Inter:wght@400;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Crimson+Text:ital,wght@0,400;0,600;0,700&family=Inter:wght@400;600&family=Roboto:wght@400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/photoswipe@5.4.4/dist/photoswipe.css">
 </head>
@@ -15,7 +15,7 @@
   <div class="sidebar-wrapper" id="sidebar-wrapper">
     <aside class="sidebar" id="nav-index" aria-label="Navigation">
       <header class="site-header">
-        <h1 class="site-title"><a href="#top">[Site Title]</a></h1>
+        <h1 class="site-title"><a href="#top">Microglial rQTL</a></h1>
       </header>
       <nav class="sidebar-nav">
         <h2 class="sidebar-nav-title">Contents</h2>
@@ -58,24 +58,57 @@
       </section>
 
       <section id="protein-ratios">
-<h2>The logic behind Protein Ratios</h2>
-<p>Genome-Wide Association Studies (GWAS) have repeatedly scanned the human genome for associations with thousands of protein levels. The approach has successfully identified numerous causal genetic links to disease by bridging the functional gap in post-GWAS analyses via mendelian randomization, colocalization and other statistical approaches. However, by considering each multiplexed protein in isolation, the GWAS fails to shed light on the pathways through which these proteins are mediating their effects. 
-Here, rather than analyzing protein abundances separately, we analyze ratios of protein pairs in a protein ratio-QTL (rQTL) framework. This approach is designed to increase the signal to noise ratio by canceling out any shared variance between protein pairs.</p>
-<p>Suppose Protein A has a genetic signal (G) but is buried in environmental noise (N), which can be either biological (e.g. inflammation) or technical. Meanwhile, Protein B has no genetic signal in that locus but is affected by the exact same noise (N).</p>
-<ul>
-<li>ProteinA=Genetics(G)+Inflammation(N)</li>
-<li>Protein B has no genetic link but fluctuates similarly with inflammation.</li>
-<li>ProteinB=Inflammation(N)</li>
-<li>When we take the ratio, we subtract the shared environment:</li>
-<li>Ratio=ProteinA – ProteinB = (G+N)−N=G</li>
-</ul>
+<h2>The Logic Behind Protein Ratios</h2>
+<p>In this study, rather than analyzing protein abundances separately, we analyze ratios of protein pairs in a protein ratio-QTL (rQTL) framework. This approach is designed to increase the signal to noise ratio by canceling out any shared variance between protein pairs.</p>
+<p>Suppose Protein A has a genetic signal but is buried in environmental noise, which can be either biological (e.g. inflammation) or technical. </p>
+<blockquote>
+<p>ProteinA abundance = Genetics A + Inflammation</p>
+</blockquote>
+<p>Meanwhile, Protein B has no genetic signal in that locus but is affected by the exact same noise, such as fluctuating similarly with inflammation.</p>
+<blockquote>
+<p>ProteinB abundance = Inflammation</p>
+</blockquote>
+<p>When we take the log ratio, we subtract the shared environment:</p>
+<blockquote>
+<p>A/B Ratio = ProteinA – ProteinB = Genetics A + Inflammation – Inflammation = Genetics A</p>
+</blockquote>
 <p>The result is a genetic signal, stripped of the biological noise that previously suppressed it.</p>
-<p><figure class="img-figure has-caption">
-  <a href="images/protein-ratios/graph-CSF-SomaScan-7k-full.png" data-pswp-width="3029" data-pswp-height="1672" target="_blank" aria-label="Open image: CSF SomaScan 7k">
-    <img src="images/protein-ratios/graph-CSF-SomaScan-7k-full.png" alt="CSF SomaScan 7k" loading="lazy" />
-  </a>
-  <figcaption>CSF SomaScan 7k</figcaption>
-</figure></p>
+
+<details class="detailed-explanation">
+<summary><span class="details-summary-text">Why does this work?</span><svg class="details-chevron-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M9 18l6-6-6-6"/></svg></summary>
+<p>Measurement &quot;noise&quot;, such as inflammation or sample handling, doesn&#39;t just add a fixed amount of protein but usually acts as a multiplier. If a sample is more concentrated or inflamed, it might double (×2) the levels of particular proteins in that sample.</p>
+<blockquote>
+<p>Protein A abundance = Genetics A×Noise</p>
+</blockquote>
+<p>Protein abundances are measured on a Log2 scale. This is crucial because the log of a product is the sum of its parts.</p>
+<blockquote>
+<p>log(Protein A abundance) = log(Genetics A×Noise) = log(Genetics A)+log(Noise)</p>
+</blockquote>
+<p>The &quot;log of a ratio&quot; is the same as subtraction: </p>
+<blockquote>
+<p>log(A/B)=log(A)−log(B)</p>
+</blockquote>
+<p>Because the noise is now an additive term, if noise is shared between two proteins, subtracting erases it completely.</p>
+<blockquote>
+<p>log(Protein A abundance)/log(Protein B abundance) = log(Genetics A×Noise)/log(Noise) = (Genetics+Noise)−(Noise) = Genetics A</p>
+</blockquote>
+
+</details>
+
+
+<p>When comparing the association strength (p-value) of a protein ratio (rQTL) against the same genetic variant’s single-protein baseline (pQTL), results fall into three distinct scenarios:</p>
+<h3>1. Signal Dilution (Both Decrease)</h3>
+<p>The two proteins are biologically unrelated and share little non-genetic variance. By creating a ratio, the unique noise of the second protein is introduced without adding any corresponding genetic signal. This dilutes the genetic signal of the first protein with the noise of the second, and vice versa, reducing statistical power to detect either signal. </p>
+<p>This represents the majority of random protein pairings.</p>
+<h3>2. Asymmetric Gain (Mixed)</h3>
+<p>The ratio improves the association strength for one protein while decreasing it for the other. The reference protein acts as a proxy for non-genetic variance, reducing the residual variance for the other protein measurement. While this signal cleaning effect improves the power to detect one of the genetic signals, the reverse correction fails due to the reverse signal containing its own unique noise that does not correlate with the reference protein.</p>
+<p>Rather than a direct biological interaction between the variant and both proteins, this scenario is interpreted as noise correction. </p>
+<h3>3. Symmetric Gain (Both Increase)</h3>
+<p>The ratio rQTL association is significantly stronger than the single-protein pQTL associations for both components. This is highly indicative of a biological interaction or a shared biochemical pathway. Two mechanisms lead to this symmetric boost in power:</p>
+<p><strong>Shared Noise Cancellation (Independent Signals):</strong>
+Proteins rarely function in isolation. Instead, they fluctuate together in response to shared biological states, such as inflammation levels, cell counts, or metabolic processes. Therefore, even if the proteins are biologically distinct and regulated by different genes, they often share the same systemic variation. For example, if both Protein A and Protein B are regulated by the same immune pathway, their levels will rise and fall together across the population, masking the subtle effects of their specific genetic variants (cis-pQTLs). Once this shared biological background is removed, the genetic signals specific to either protein rise in significance.</p>
+<p><strong>Opposing Genetic Effects:</strong>
+In rarer cases, the genetic variant affects both proteins but in opposite directions — increasing Protein A while decreasing Protein B. Because the genetic effects have opposite signs, the composite signal becomes stronger than either protein shows on its own. This would point to a direct functional relationship, such as a substrate-product pair where the variant affects the enzyme converting one to the other.</p>
 
       </section>
 
