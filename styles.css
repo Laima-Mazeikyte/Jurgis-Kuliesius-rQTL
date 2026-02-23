@@ -197,19 +197,23 @@ body {
 }
 
 .sidebar-nav-list li {
-  border-bottom: 1px solid #fbc5c5;
+  border-bottom: none;
 }
 .sidebar-nav-list li:last-child {
-  border-bottom: 1px solid #fbc5c5;
+  border-bottom: none;
 }
 
 .sidebar-nav-list a {
   display: block;
-  margin-left: calc(-1 * var(--page-gap));
+  margin-left: -16px;
   /* Extend to sidebar right edge (nav padding + scrollbar area) */
   margin-right: calc(-2 * var(--page-gap));
-  padding: 0.5rem var(--page-gap);
+  padding-top: 12px;
+  padding-bottom: 12px;
+  padding-left: var(--page-gap);
   padding-right: calc(2 * var(--page-gap));
+  border: none;
+  border-bottom: 1px solid #dbc7b9;
   color: inherit;
   text-decoration: none;
 }
