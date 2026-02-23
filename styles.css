@@ -630,7 +630,10 @@ main section blockquote {
     align-items: center;
     margin-left: calc(-1 * var(--page-gap));
     margin-right: calc(-1 * var(--page-gap));
-    padding: 0 var(--page-gap);
+    padding-top: 12px;
+    padding-bottom: 12px;
+    padding-left: var(--page-gap);
+    padding-right: var(--page-gap);
   }
 
   /* Mobile: Index button — minimum 44×44px touch target (WCAG 2.5.5), room for "Index" + padding */
