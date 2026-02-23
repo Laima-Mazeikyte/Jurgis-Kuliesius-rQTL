@@ -258,7 +258,8 @@ function buildSectionsHtml(sections, dimensions) {
       const detailedHtml = marked.parse(block.body, { renderer });
       const detailsHtml =
         '\n<details class="detailed-explanation">\n<summary>' +
-        escapeHtml(block.title) +
+        '<span class="details-summary-text">' + escapeHtml(block.title) + '</span>' +
+        '<svg class="details-chevron-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M9 18l6-6-6-6"/></svg>' +
         '</summary>\n' +
         detailedHtml +
         '\n</details>\n';

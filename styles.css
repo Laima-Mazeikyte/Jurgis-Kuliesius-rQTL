@@ -356,8 +356,8 @@ main section h4 {
 
 /* Detailed explanation: optional expandable block (collapsed by default) */
 main section .detailed-explanation {
-  margin-top: 1rem;
-  padding: 1rem 1.25rem;
+  margin-top: 0.5rem;
+  padding: 0.5rem 1.25rem;
   background: var(--color-sidebar-bg);
   border-left: 3px solid var(--color-heading2);
   border-radius: 0 8px 8px 0;
@@ -376,6 +376,21 @@ main section .detailed-explanation summary {
   min-height: 44px;
   display: flex;
   align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+}
+
+main section .detailed-explanation summary .details-chevron-icon {
+  flex-shrink: 0;
+  transition: transform 0.2s ease;
+}
+
+main section .detailed-explanation:not([open]) summary .details-chevron-icon {
+  transform: rotate(90deg);
+}
+
+main section .detailed-explanation[open] summary .details-chevron-icon {
+  transform: rotate(-90deg);
 }
 
 main section .detailed-explanation summary::-webkit-details-marker {
