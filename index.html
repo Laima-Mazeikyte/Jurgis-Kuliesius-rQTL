@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="">
-  <title>Document</title>
+  <title>Microglial rQTL</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Crimson+Text:ital,wght@0,400;0,600;0,700&family=Inter:wght@400;600&family=Roboto:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -23,7 +23,7 @@
           <li><a href="#intro">Study Design &amp; Rationale</a></li>
           <li><a href="#protein-ratios">The Logic Behind Protein Ratios</a></li>
           <li><a href="#section-2">Ratios of the Microglial Proteome</a></li>
-          <li><a href="#section-3">Case Study: TREM2 / TREM2 signal in blood plasma</a></li>
+          <li><a href="#section-3">Case Study: TREM2 / TREM2 Signal in Blood Plasma</a></li>
           <li><a href="#about">About</a></li>
         </ol>
       </nav>
@@ -41,7 +41,7 @@
 
   <div class="content-window" id="top">
     <main>
-      <h1 class="page-title">{{siteTitle}}</h1>
+      <h1 class="page-title">Microglial rQTL</h1>
       <section id="intro">
 <h2>Study Design &amp; Rationale</h2>
 <p>Genome-Wide Association Studies (GWAS) have repeatedly scanned the human genome for associations with thousands of protein levels. The approach has successfully identified numerous causal genetic links to disease by bridging the functional gap in post-GWAS analyses via mendelian randomization, colocalization and other statistical approaches.</p>
@@ -149,12 +149,17 @@ In rarer cases, the genetic variant affects both proteins but in opposite direct
       </section>
 
       <section id="section-3">
-<h2>Case Study: TREM2 / TREM2 signal in blood plasma</h2>
+<h2>Case Study: TREM2 / TREM2 Signal in Blood Plasma</h2>
 <p>We measured the protein TREM2 using two different probes (SomaScan aptamers) in the same cohort in plasma samples. As expected, the two protein abundance measurements were highly correlated (r = 0.81), indicating they were both detecting the same broad differences in TREM2 abundance. However, when we analyzed the ratio of these two measurements (<em>Probe 16300-4 / Probe 5635-66</em>), the genetic signal at the TREM2 locus became stronger than for either measurement alone.</p>
 <p>Counterintuitively, taking the ratio of two measurements for the same protein acts as a powerful &quot;noise filter.&quot;</p>
 <ul>
 <li><strong>Canceling Abundance:</strong> Both probes capture the total amount of protein driven by non-genetic factors either biological (inflammation or clearance rates) or technical (sampling handling variability). Forming a ratio of the two protein measurements removes this shared variation.</li>
 <li><strong>Revealing Structure:</strong> What remains in the ratio is the difference between the two probes. This creates a detector for genetic variants that alter the protein&#39;s physical structure (epitopes) or isoform composition, affecting how well one probe binds the target compared to the other.</li>
+</ul>
+<p>Focusing on this difference, we fine-mapped the signal using SuSiE to two variants that affect which version of TREM2 is present, rather than just how much:</p>
+<ul>
+<li><strong>R62H Mutation (Exon 2 Skipping):</strong> The ratio highlighted the R62H variant in TREM2 (rs143332484), a mutation <a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC11224616/">known to increase the skipping of Exon 2</a>. This suggests that one of the aptamers binds to the region encoded by Exon 2 (losing signal when it is skipped), while the other binds a region common to all isoforms. </li>
+<li><strong>Regulatory Variant (rs188904277):</strong> A non-coding variant predicted to alter transcription factor binding (81% confidence via AlphaGenome), which could be regulating the specific expression of TREM2 isoforms.</li>
 </ul>
 
       </section>

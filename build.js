@@ -297,7 +297,7 @@ async function run() {
   const navHtml = buildNavHtml(sections);
 
   let template = fs.readFileSync(TEMPLATE_PATH, 'utf8');
-  template = template.replace('{{siteTitle}}', escapeHtml(siteTitle));
+  template = template.replace(/\{\{siteTitle\}\}/g, escapeHtml(siteTitle));
   template = template.replace('{{nav}}', navHtml);
   template = template.replace('{{sections}}', sectionsHtml);
 
