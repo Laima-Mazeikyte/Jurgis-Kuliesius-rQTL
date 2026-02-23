@@ -20,7 +20,7 @@
       <nav class="sidebar-nav">
         <h2 class="sidebar-nav-title">Contents</h2>
         <ol class="sidebar-nav-list">
-          <li><a href="#intro">Intro</a></li>
+          <li><a href="#intro">Study design &amp; rationale</a></li>
           <li><a href="#protein-ratios">The Logic Behind Protein Ratios</a></li>
           <li><a href="#section-2">Section 2</a></li>
           <li><a href="#section-3">Section 3</a></li>
@@ -42,14 +42,19 @@
   <div class="content-window" id="top">
     <main>
       <section id="intro">
-<h2>Intro</h2>
-<p>A short introduction to this document. Edit this content in <code>content/00-intro/index.md</code>.</p>
+<h2>Study design &amp; rationale</h2>
+<p>Genome-Wide Association Studies (GWAS) have repeatedly scanned the human genome for associations with thousands of protein levels. The approach has successfully identified numerous causal genetic links to disease by bridging the functional gap in post-GWAS analyses via mendelian randomization, colocalization and other statistical approaches.</p>
 
 <details class="detailed-explanation">
-<summary>Detailed explanation</summary>
-<p>This block is only shown when the reader expands &quot;Detailed explanation&quot;. It can contain <strong>markdown</strong>, lists, and subheadings. Experts can ignore it entirely.</p>
+<summary><span class="details-summary-text">Primer on Proteomic GWAS</span><svg class="details-chevron-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M9 18l6-6-6-6"/></svg></summary>
+<p>While GWAS has successfully identified genomic loci associated with numerous conditions like Alzheimer&#39;s disease, most identified variants lie in non-coding regions. This makes it difficult to determine the biological mechanism and the specific genes, tissues, or pathways, through which a specific genetic variant affects the disease phenotype.</p>
+<p>To resolve this, the field has turned to proteomic GWAS, also known as protein Quantitative Trait Loci (pQTL) analysis. In this approach, instead of linking genetics to a disease, the individual abundances of thousands of proteins are treated as phenotypes of interest. These associations are categorized as either cis-pQTLs, where variants are located near or within the protein&#39;s own gene indicating direct regulation, or trans-pQTLs, where distant variants regulate the protein. Mapping cis protein-regulating genetic variants is inherently useful for modern tools like Mendelian Randomization, which can statistically predict whether a drug targeting a specific protein will effectively treat a disease based on genetic evidence.</p>
 
 </details>
+
+
+<p>However, by considering each multiplexed protein in isolation, the GWAS fails to shed light on the pathways through which these proteins are mediating their effects.</p>
+
       </section>
 
       <section id="protein-ratios">
