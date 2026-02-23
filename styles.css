@@ -403,6 +403,11 @@ main section .detailed-explanation summary {
   gap: 1rem;
 }
 
+main section .detailed-explanation summary .details-summary-text {
+  color: rgba(26, 26, 26, 1);
+  font-size: 16px;
+}
+
 main section .detailed-explanation summary .details-chevron-icon {
   flex-shrink: 0;
   transition: transform 0.2s ease;
@@ -459,6 +464,58 @@ main section blockquote {
   margin-bottom: 8px;
   margin-left: 12px;
   margin-right: 12px;
+}
+
+/* About section: citation blockquote inside details — no padding, compact p margins */
+#about .detailed-explanation blockquote {
+  padding: 0;
+}
+#about .detailed-explanation blockquote p {
+  margin-top: 8px;
+  margin-bottom: 8px;
+  margin-left: 12px;
+  margin-right: 12px;
+}
+
+/* Citation blockquote with copy button */
+.citation-blockquote-wrapper {
+  margin: 0;
+  display: flex;
+  flex: 1;
+  min-width: 0;
+  width: 100%;
+  height: fit-content;
+}
+.citation-blockquote-wrapper blockquote {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+}
+.citation-blockquote-wrapper blockquote > p {
+  flex: 1;
+  min-width: 0;
+  margin-right: 0;
+}
+.citation-blockquote-wrapper .citation-copy-btn {
+  flex-shrink: 0;
+  margin-top: 14px;
+  margin-bottom: 14px;
+  margin-right: 12px;
+  vertical-align: bottom;
+  padding: 0.35rem 0.6rem;
+  font-family: "Inter", -apple-system, BlinkMacSystemFont, sans-serif;
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--color-body);
+  background: transparent;
+  border: 1px solid rgba(187, 13, 46, 0.35);
+  border-radius: 6px;
+  cursor: pointer;
+}
+.citation-copy-btn:hover,
+.citation-copy-btn:focus-visible {
+  border-color: rgba(187, 13, 46, 0.6);
+  outline: none;
 }
 
 /* Mobile: sticky title bar + full-page overlay for sections */
