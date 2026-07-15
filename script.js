@@ -57,20 +57,20 @@
   // Sticky bar (44px) + 24px breathing room above section title (must match CSS scroll-margin on mobile)
   var MOBILE_SCROLL_OFFSET = 44 + 24;
 
-  // Clicking #top (site title) scrolls to first section so section title is visible
+  // Clicking #top (site title) scrolls to the page title H1 at top of content
   document.addEventListener('click', function (e) {
     var link = e.target.closest('a[href="#top"]');
     if (link) {
       e.preventDefault();
-      var firstSection = document.querySelector('main > section');
-      if (firstSection) {
+      var pageTitle = document.querySelector('main .page-title');
+      if (pageTitle) {
         if (isMobile()) {
-          scrollToWithOffset(firstSection, MOBILE_SCROLL_OFFSET);
+          scrollToWithOffset(pageTitle, MOBILE_SCROLL_OFFSET);
         } else {
-          firstSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          pageTitle.scrollIntoView({ behavior: 'smooth', block: 'start' });
         }
       } else {
-        window.scrollTo(0, 0);
+        window.scrollTo({ top: 0, behavior: 'smooth' });
       }
       if (isMobile() && wrapper.classList.contains('overlay-open')) {
         closeOverlay();
@@ -116,36 +116,36 @@
 
 // Citation copy button: copy blockquote text to clipboard
 (function () {
-  var wrapper = document.querySelector('#about .citation-blockquote-wrapper');
-  if (!wrapper) return;
-  var blockquote = wrapper.querySelector('blockquote');
-  var btn = wrapper.querySelector('.citation-copy-btn');
-  if (!blockquote || !btn) return;
+  document.querySelectorAll('[id^="about"] .citation-blockquote-wrapper').forEach(function (wrapper) {
+    var blockquote = wrapper.querySelector('blockquote');
+    var btn = wrapper.querySelector('.citation-copy-btn');
+    if (!blockquote || !btn) return;
 
-  function getCitationText() {
-    var clone = blockquote.cloneNode(true);
-    var btnClone = clone.querySelector('.citation-copy-btn');
-    if (btnClone) btnClone.remove();
-    return clone.textContent.trim();
-  }
-  var citationText = getCitationText();
-
-  btn.addEventListener('click', function () {
-    if (!navigator.clipboard || !navigator.clipboard.writeText) {
-      return;
+    function getCitationText() {
+      var clone = blockquote.cloneNode(true);
+      var btnClone = clone.querySelector('.citation-copy-btn');
+      if (btnClone) btnClone.remove();
+      return clone.textContent.trim();
     }
-    navigator.clipboard.writeText(citationText).then(
-      function () {
-        var label = btn.getAttribute('aria-label');
-        btn.textContent = 'Copied!';
-        btn.setAttribute('aria-label', 'Citation copied');
-        setTimeout(function () {
-          btn.textContent = 'Copy';
-          if (label) btn.setAttribute('aria-label', label);
-        }, 1500);
-      },
-      function () {}
-    );
+    var citationText = getCitationText();
+
+    btn.addEventListener('click', function () {
+      if (!navigator.clipboard || !navigator.clipboard.writeText) {
+        return;
+      }
+      navigator.clipboard.writeText(citationText).then(
+        function () {
+          var label = btn.getAttribute('aria-label');
+          btn.textContent = 'Copied!';
+          btn.setAttribute('aria-label', 'Citation copied');
+          setTimeout(function () {
+            btn.textContent = 'Copy';
+            if (label) btn.setAttribute('aria-label', label);
+          }, 1500);
+        },
+        function () {}
+      );
+    });
   });
 })();
 

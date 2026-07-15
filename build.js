@@ -66,10 +66,12 @@ function discoverSections() {
     }
 
     sections.push({
-      id: slug,
+      id: frontmatter.id || slug,
       dirName: dir.name,
       dirPath,
       title: frontmatter.title || slug,
+      marker: frontmatter.marker === true,
+      navGrouped: frontmatter.navGrouped === true,
       content,
     });
   }
@@ -249,6 +251,15 @@ function extractDetailsBlocks(content) {
 function buildSectionsHtml(sections, dimensions) {
   const parts = [];
   for (const section of sections) {
+    if (section.marker) {
+      parts.push(
+        `      <section id="${section.id}">\n` +
+        `<h1 class="page-title">${escapeHtml(section.title)}</h1>\n` +
+        `      </section>`
+      );
+      continue;
+    }
+
     const renderer = createRenderer(section.id, dimensions);
     const { content: contentWithoutBlocks, blocks } = extractDetailsBlocks(section.content);
     let bodyHtml = marked.parse(contentWithoutBlocks, { renderer });
@@ -256,7 +267,7 @@ function buildSectionsHtml(sections, dimensions) {
     for (let i = 0; i < blocks.length; i++) {
       const block = blocks[i];
       let detailedHtml = marked.parse(block.body, { renderer });
-      if (section.id === 'about' && block.title === 'How to cite?') {
+      if (section.id.startsWith('about') && block.title === 'How to cite?') {
         detailedHtml = detailedHtml.replace(
           /<blockquote>([\s\S]*?)<\/blockquote>/,
           '<div class="citation-blockquote-wrapper"><blockquote>$1<button type="button" class="citation-copy-btn" aria-label="Copy citation">Copy</button></blockquote></div>'
@@ -277,9 +288,17 @@ function buildSectionsHtml(sections, dimensions) {
   return parts.join('\n\n');
 }
 
+function isNavGrouped(sectionId) {
+  return ['section-2', 'section-3', 'section-5', 'section-6', 'section-7'].includes(sectionId);
+}
+
 function buildNavHtml(sections) {
   return sections
-    .map(({ id, title }) => `          <li><a href="#${id}">${escapeHtml(title)}</a></li>`)
+    .map(({ id, title, navGrouped }) => {
+      const classAttr =
+        navGrouped || isNavGrouped(id) ? ' class="nav-item-grouped"' : '';
+      return `          <li${classAttr}><a href="#${id}">${escapeHtml(title)}</a></li>`;
+    })
     .join('\n');
 }
 
@@ -289,7 +308,8 @@ function buildNavHtml(sections) {
 
 async function run() {
   const meta = loadMeta();
-  const siteTitle = meta.siteTitle != null ? meta.siteTitle : '[Site Title]';
+  const headerTitle = meta.headerTitle != null ? meta.headerTitle : '[Site Title]';
+  const siteTitle = meta.siteTitle != null ? meta.siteTitle : headerTitle;
 
   const { sections, warnings: discoverWarnings } = discoverSections();
   const allWarnings = [...discoverWarnings];
@@ -303,6 +323,7 @@ async function run() {
   const navHtml = buildNavHtml(sections);
 
   let template = fs.readFileSync(TEMPLATE_PATH, 'utf8');
+  template = template.replace(/\{\{headerTitle\}\}/g, escapeHtml(headerTitle));
   template = template.replace(/\{\{siteTitle\}\}/g, escapeHtml(siteTitle));
   template = template.replace('{{nav}}', navHtml);
   template = template.replace('{{sections}}', sectionsHtml);

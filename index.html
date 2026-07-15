@@ -15,16 +15,22 @@
   <div class="sidebar-wrapper" id="sidebar-wrapper">
     <aside class="sidebar" id="nav-index" aria-label="Navigation">
       <header class="site-header">
-        <div class="site-title"><a href="#top">Microglial rQTL</a></div>
+        <div class="site-title"><a href="#top">Protein rQTL</a></div>
       </header>
       <nav class="sidebar-nav">
         <h2 class="sidebar-nav-title">Contents</h2>
         <ol class="sidebar-nav-list">
           <li><a href="#intro">Study Design &amp; Rationale</a></li>
           <li><a href="#protein-ratios">The Logic Behind Protein Ratios</a></li>
-          <li><a href="#section-2">Ratios of the Microglial Proteome</a></li>
-          <li><a href="#section-3">Case Study: TREM2 / TREM2 Signal in Blood Plasma</a></li>
-          <li><a href="#about">About</a></li>
+          <li><a href="#section-4">TREM2 rQTL</a></li>
+          <li class="nav-item-grouped"><a href="#section-5">SomaScan pQTL in CSF</a></li>
+          <li class="nav-item-grouped"><a href="#section-6">TREM2 Ratio Quantitative Trait Locus Analysis</a></li>
+          <li class="nav-item-grouped"><a href="#section-7">Second-Stage Proteome-Wide rQTL Mapping Centered on TREM2</a></li>
+          <li class="nav-item-grouped"><a href="#about-inline">About</a></li>
+          <li><a href="#microglial-rqtl">Microglial rQTL</a></li>
+          <li class="nav-item-grouped"><a href="#section-2">Ratios of the Microglial Proteome</a></li>
+          <li class="nav-item-grouped"><a href="#section-3">Case Study: TREM2 / TREM2 Signal in Blood Plasma</a></li>
+          <li class="nav-item-grouped"><a href="#about">About</a></li>
         </ol>
       </nav>
     </aside>
@@ -41,7 +47,7 @@
 
   <div class="content-window" id="top">
     <main>
-      <h1 class="page-title">Microglial rQTL</h1>
+      <h1 class="page-title">Protein rQTL</h1>
       <section id="intro">
 <h2>Study Design &amp; Rationale</h2>
 <p>Genome-Wide Association Studies (GWAS) have repeatedly scanned the human genome for associations with thousands of protein levels. The approach has successfully identified numerous causal genetic links to disease by bridging the functional gap in post-GWAS analyses via mendelian randomization, colocalization and other statistical approaches.</p>
@@ -50,6 +56,12 @@
 <summary><span class="details-summary-text">Primer on Proteomic GWAS</span><svg class="details-chevron-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M9 18l6-6-6-6"/></svg></summary>
 <p>While GWAS has successfully identified genomic loci associated with numerous conditions like Alzheimer&#39;s disease, most identified variants lie in non-coding regions. This makes it difficult to determine the biological mechanism and the specific genes, tissues, or pathways, through which a specific genetic variant affects the disease phenotype.</p>
 <p>To resolve this, the field has turned to proteomic GWAS, also known as protein Quantitative Trait Loci (pQTL) analysis. In this approach, instead of linking genetics to a disease, the individual abundances of thousands of proteins are treated as phenotypes of interest. These associations are categorized as either cis-pQTLs, where variants are located near or within the protein&#39;s own gene indicating direct regulation, or trans-pQTLs, where distant variants regulate the protein. Mapping cis protein-regulating genetic variants is inherently useful for modern tools like Mendelian Randomization, which can statistically predict whether a drug targeting a specific protein will effectively treat a disease based on genetic evidence.</p>
+<p><figure class="img-figure has-caption">
+  <a href="images/intro/TREM2_Q9NZC2_16300-4-full.png" data-pswp-width="3707" data-pswp-height="2275" target="_blank" aria-label="Open image: Proteomic GWAS of TREM2 in cerebrospinal fluid">
+    <img src="images/intro/TREM2_Q9NZC2_16300-4-full.png" alt="Proteomic GWAS of TREM2 in cerebrospinal fluid" loading="lazy" />
+  </a>
+  <figcaption>Proteomic GWAS of TREM2 in cerebrospinal fluid</figcaption>
+</figure></p>
 
 </details>
 
@@ -127,6 +139,104 @@ In rarer cases, the genetic variant affects both proteins but in opposite direct
 
       </section>
 
+      <section id="section-4">
+<h1 class="page-title">TREM2 rQTL</h1>
+      </section>
+
+      <section id="section-5">
+<h2>SomaScan pQTL in CSF</h2>
+<p>The proteogenomics framework was applied to 2,273 European-ancestry CSF samples. Participants had a mean age of 69.4 years (SD 12.0; range 19–99), and 50.3% were female. The cohort included 1,083 participants with AD or autosomal-dominant AD (47.6%), 909 controls (40.0%) and 281 participants with other diagnoses (12.4%). 6,464 SomaScan human protein assay measurements passing quality control were included.</p>
+<p>Protein abundance measurements were log₂-transformed, adjusted for age, sex, sample-age and SomaScan plate, and rank-inverse-normal transformed within the contributing subcohorts. Single-protein GWAS included three genetic principal components to account for ancestry and two proteomic principal components to account for broad covariance across the measured proteome.</p>
+<p>The number of proteomic PCs was selected by testing each PC for association with known pleiotropic biology, namely Alzheimer’s Disease status and APOE ε4 carrier status, while accounting for age, sex, batch and plate. AD and APOE ε4 were used only to screen the components; they were not removed from the protein phenotypes.</p>
+<p>Proteomic PC1 and PC2 collectively explained 25.5% of total proteomic variance (18.7% and 6.7%, respectively), without a statistically significant association to AD or APOE ε4 status. PC3 explained another 6.1% but was associated with both AD status (P=0.00101) and APOE ε4 status (P=3.64×10−5). Therefore, Proteomic PC1 and PC2 were retained as global proteomic covariates, while PC3 and subsequent components were excluded to reduce the risk of adjusting for AD-related biology.</p>
+<p>The resulting pQTL GWAS scan identified at least one genome-wide significant association for 1,927 of the 6,464 protein assays, representing 29.8% of the measured proteome. LD clumping at r2&lt;0.01 retained 3,561 protein–variant association signals (2,379 cis and 1,182 trans), involving 2,792 distinct variants. These adjusted single-protein associations provided the baseline against which rQTL signal gain was evaluated. Because the pQTL models already included Proteomic covariates, while the ratio models did not include proteomic PCs, the ratio analysis asked whether pairwise normalization could recover genetic signal beyond broad, proteome-wide adjustment.</p>
+
+      </section>
+
+      <section id="section-6">
+<h2>TREM2 Ratio Quantitative Trait Locus Analysis</h2>
+<p>To test whether pairwise normalization could reveal stronger TREM2 genetic associations and potentially reveal TREM2 downstream pathways, TREM2 was paired with each of the other 6,463 protein measurements. Each phenotype was calculated on the log₂ scale as log₂(TREM2) − log₂(reference protein), and a separate genome-wide rQTL scan was performed for every ratio. </p>
+<p>Importantly, unlike the single-protein baseline, the ratio models did not include proteomic PCs because the ratio itself was intended to remove variation shared between two proteins. Association improvement was quantified using p-gain: the difference in −log⁡(P) between the ratio and the stronger of its two constituent pQTLs. A pair was retained only if its ratio was genome-wide significant and improved upon the stronger pQTL by more than 5.11 −log(⁡P) units, corresponding to Bonferroni correction across 6,463 ratios. The distribution figure shows the maximum p-gain observed for each reference protein across all tested variants.</p>
+<p><figure class="img-figure has-caption">
+  <a href="images/section-6/figure_3-full.png" data-pswp-width="3439" data-pswp-height="2324" target="_blank" aria-label="Open image: rQTL distribution graph with the maximum p-gain observed for each protein">
+    <img src="images/section-6/figure_3-full.png" alt="rQTL distribution graph with the maximum p-gain observed for each protein" loading="lazy" />
+  </a>
+  <figcaption>rQTL distribution graph with the maximum p-gain observed for each protein</figcaption>
+</figure></p>
+<p>Only five proteins (DDRGK1, HTRA2, IGF2R, PEF1 and UBE2L6) passed both significance requirements, representing ~0.08% of all tested TREM2 ratios. This shows that signal gain is highly selective and not a general consequence of ratio formation. TREM2 provided the stronger constituent pQTL in every significant pair, meaning that these ratios specifically enhanced an existing TREM2 genetic association, the significance of which is still under consideration.</p>
+<p><figure class="img-figure has-caption">
+  <a href="images/section-6/figure_2-full.png" data-pswp-width="2193" data-pswp-height="2147" target="_blank" aria-label="Open image: Forming a ratio increases the significance of genetic associations">
+    <img src="images/section-6/figure_2-full.png" alt="Forming a ratio increases the significance of genetic associations" loading="lazy" />
+  </a>
+  <figcaption>Forming a ratio increases the significance of genetic associations</figcaption>
+</figure></p>
+<p>The three Manhattan plots show the genome-wide associations for TREM2, DDRGK1 and their ratio.
+Sensitivity models showed that significant ratios had 23–28% lower standard errors than the corresponding TREM2 pQTL models, while their estimated genetic effects were only 3–10% larger. The gain was therefore driven primarily by improved precision and not increased genetic effect. This pattern is consistent with the reference proteins capturing residual variation shared with TREM2, allowing that variation to be reduced through subtraction.</p>
+<p>All five candidate partners strengthened the same TREM2 trans-pQTL in the MS4A locus, while DDRGK1 also strengthened the chromosome 6 TREM2 cis-pQTL. Thus, the five results represent distinct protein pairings that sharpen the same principal TREM2 genetic signal rather than five independent genetic loci. These proteins were subsequently used as anchors in their own proteome-wide rQTL scans to determine whether they repeatedly identified the same second-tier proteins.</p>
+
+      </section>
+
+      <section id="section-7">
+<h2>Second-Stage Proteome-Wide rQTL Mapping Centered on TREM2</h2>
+<p>Each of the five candidate TREM2 partners was used as a new anchor and paired with every other measured protein. The same genome-wide significance and Bonferroni-corrected p-gain requirements used in the TREM2 screen were applied to each follow-up scan. The follow-up scans identified 59 significant ratios for DDRGK1, 87 for HTRA2, 92 for IGF2R, 38 for PEF1 and 23 for UBE2L6. After excluding TREM2 and the original candidate partners, 58, 86, 91, 37 and 22 proteins, respectively, remained for recurrence analysis. 
+Most significant proteins were specific to an individual anchor, so the network visualization was restricted to the strict recurrent core. Four proteins—FAM177A1, LRRN1, SIGLEC9 and SPC25—formed significant rQTLs with all five anchors. A further five—MATN3, ST8SIA1, ADGRG1, CNDP1 and FAM189A2—were identified by four of the five anchors.</p>
+<p><figure class="img-figure has-caption">
+  <a href="images/section-7/figure_4-full.png" data-pswp-width="1890" data-pswp-height="1152" target="_blank" aria-label="Open image: Two-stage proteome-wide rQTL mapping centered on TREM2">
+    <img src="images/section-7/figure_4-full.png" alt="Two-stage proteome-wide rQTL mapping centered on TREM2" loading="lazy" />
+  </a>
+  <figcaption>Two-stage proteome-wide rQTL mapping centered on TREM2</figcaption>
+</figure></p>
+<p>Based on functional annotation, 13 of the 15 displayed proteins aligned with four recurring biological themes. TREM2, SIGLEC9 and ADGRG1 were associated with phagocytosis; DDRGK1, HTRA2, UBE2L6 and FAM177A1 with protein modification; IGF2R, PEF1, ST8SIA1 and FAM189A2 with intracellular trafficking; and LRRN1 and MATN3 with extracellular organization. SPC25 and CNDP1 were not assigned to these four themes.</p>
+<p>The proteins span several cellular compartments, including the plasma membrane, endosomal and secretory systems, mitochondria, cytoplasm and extracellular space. Their recurrence therefore does not define a single linear TREM2 pathway, but it suggests that independently selected rQTL anchors repeatedly connect TREM2-associated genetic variation to a focused set of related cellular functions. These relationships provide experimentally testable candidates for investigating the broader proteomic context of TREM2 biology.</p>
+
+      </section>
+
+      <section id="about-inline">
+<h1>About</h1>
+<p>This interactive resource accompanies Poster 0146: TREM2 Ratio Proteogenomics in Alzheimer&#39;s Disease, presented at the 2026 AAIC (Alzheimer&#39;s Association Internation Conference) in London.</p>
+<p>The work was conducted by the Cruchaga Lab at Washington University in St. Louis. <a href="https://cruchagalab.wustl.edu/">Cruchaga Lab</a></p>
+<p><figure class="img-figure has-caption">
+  <a href="images/about-inline/TREM2-Ratio-Proteogenomics-in-Alzheimers-Disease-full.png" data-pswp-width="3052" data-pswp-height="2671" target="_blank" aria-label="Open image: Poster">
+    <img src="images/about-inline/TREM2-Ratio-Proteogenomics-in-Alzheimers-Disease-full.png" alt="Poster" loading="lazy" />
+  </a>
+  <figcaption>Poster</figcaption>
+</figure></p>
+<p><strong>Lead Analyst:</strong> <br>
+Jurgis Kuliesius, PhD</p>
+<p><strong>Principal Investigator:</strong> <br>
+Prof. Carlos Cruchaga, PhD</p>
+<p><strong>Collaborators:</strong> <br>
+Gao Wang, PhD (Asst. Prof, Columbia University) - Statistical methodology <br>
+Matthew Johnson, MS - Genetics data <br>
+Cyril Pottier, PhD (Asst. Prof.) - Genetics data <br>
+Menghan Liu, MS - Phenotypic data <br>
+Katherine Gong, MS - Phenotypic data <br>
+<br></p>
+
+<details class="detailed-explanation">
+<summary><span class="details-summary-text">How to cite?</span><svg class="details-chevron-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M9 18l6-6-6-6"/></svg></summary>
+<p>Please refer to the accompanying abstract/poster:</p>
+<div class="citation-blockquote-wrapper"><blockquote>
+<p>Kuliesius, J., et al. &quot;TREM2 Ratio Proteogenomics in Alzheimer&#39;s Disease&quot;, Poster 0146, AAIC 2026.</p>
+<button type="button" class="citation-copy-btn" aria-label="Copy citation">Copy</button></blockquote></div>
+
+</details>
+
+
+
+<details class="detailed-explanation">
+<summary><span class="details-summary-text">Have questions?</span><svg class="details-chevron-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M9 18l6-6-6-6"/></svg></summary>
+<p>Contact at <a href="mailto:jurgis@wustl.edu">jurgis@wustl.edu</a></p>
+
+</details>
+
+
+      </section>
+
+      <section id="microglial-rqtl">
+<h1 class="page-title">Microglial rQTL</h1>
+      </section>
+
       <section id="section-2">
 <h2>Ratios of the Microglial Proteome</h2>
 <p>In this study, we compared rQTL results from cerebrospinal fluid and blood plasma, revealing a fundamental difference in how Alzheimer&#39;s disease-associated microglia proteins are regulated in their native environment (CSF) versus the periphery (blood plasma). The two cohorts share similar sample sizes (1,888 for CSF vs. 2,150 for plasma), identical European ancestry, and the same multiplex proteomic technology (SomaScan 7k). Furthermore, every protein measurement was genetically validated to possess a cis pQTL within its respective tissue. Despite these consistencies, the CSF results (<em>CSF graph</em>) demonstrate a highly interconnected proteomic network that is absent in plasma (<em>Plasma graph</em>). </p>
@@ -165,7 +275,7 @@ In rarer cases, the genetic variant affects both proteins but in opposite direct
       </section>
 
       <section id="about">
-<h2>About</h2>
+<h1>About</h1>
 <p>This interactive resource accompanies Poster P17.18LB: Multi-tissue Ratio Proteogenomics for Pathway Discovery, presented at the 2026 US HUPO (Human Proteome Organization) Conference.</p>
 <p>The work was conducted by the Cruchaga Lab at Washington University in St. Louis. <a href="https://cruchagalab.wustl.edu/">Cruchaga Lab</a></p>
 <p><figure class="img-figure has-caption">

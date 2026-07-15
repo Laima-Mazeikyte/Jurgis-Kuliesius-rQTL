@@ -1,15 +1,16 @@
 ---
 title: About
+id: about-inline
 navGrouped: true
 ---
 
 # About
 
-This interactive resource accompanies Poster P17.18LB: Multi-tissue Ratio Proteogenomics for Pathway Discovery, presented at the 2026 US HUPO (Human Proteome Organization) Conference.
+This interactive resource accompanies Poster 0146: TREM2 Ratio Proteogenomics in Alzheimer's Disease, presented at the 2026 AAIC (Alzheimer's Association Internation Conference) in London.
 
 The work was conducted by the Cruchaga Lab at Washington University in St. Louis. [Cruchaga Lab](https://cruchagalab.wustl.edu/)
 
-![Poster](Multi-Tissue-Ratio-Proteogenomics-for-Pathway-Discovery.png)
+![Poster](TREM2-Ratio-Proteogenomics-in-Alzheimers-Disease.png)
 
 **Lead Analyst:** <br>
 Jurgis Kuliesius, PhD
@@ -26,7 +27,7 @@ Katherine Gong, MS - Phenotypic data <br>
 <br>
 ::: details How to cite?
 Please refer to the accompanying abstract/poster:
-> Kuliesius, J., et al. "Multi-tissue Ratio Proteogenomics for Pathway Discovery." Poster P17.18LB, US HUPO Conference 2026.
+> Kuliesius, J., et al. "TREM2 Ratio Proteogenomics in Alzheimer's Disease", Poster 0146, AAIC 2026.
 :::
 
 ::: details Have questions?

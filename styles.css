@@ -26,6 +26,8 @@
   --page-gap: 1rem;
   /* Larger top padding for content (desktop + mobile) */
   --content-top-padding: 2rem;
+  /* Vertical space between main content sections */
+  --section-gap: 4rem;
   --color-content-bg: #F4EDE8;
   --color-sidebar-bg: #FAF7F5;
 
@@ -70,6 +72,7 @@
   --font-nav-label-text-transform: none;
   --font-nav-label-letter-spacing: 0.05em;
   --font-nav-list-size: 19px;
+  --nav-group-indent: 1.25rem;
 
   /* Heading 3 / 4 and small (future markdown/content) */
   --font-heading3-size: 20px;
@@ -93,8 +96,9 @@ body {
   color: var(--color-body);
   display: flex;
   min-height: 100vh;
-  /* Page scrolls so sidebar can stay sticky */
-  overflow-x: hidden;
+  width: 100%;
+  max-width: 100%;
+  /* Page scrolls so sidebar can stay sticky — avoid overflow-x on html/body (breaks sticky) */
 }
 
 /* Sidebar wrapper: sticky so it stays in view when content scrolls */
@@ -113,14 +117,16 @@ body {
   height: 100vh;
   max-height: 100vh;
   background: var(--color-sidebar-bg);
-  /* Clip content to wrapper when collapsed */
-  overflow: hidden;
+  /* Clip content to wrapper when collapsed; vertical overflow handled by .sidebar-nav */
+  overflow-x: hidden;
+  overflow-y: visible;
 }
 
 .sidebar-wrapper.is-collapsed {
   width: 0;
   min-width: 0;
   border: none;
+  overflow: hidden;
 }
 
 /* Don't use display:none when collapsed – content stays in layout and is clipped by width:0,
@@ -138,6 +144,8 @@ body {
   align-items: center;
   height: 3rem;
   padding: 0 var(--page-gap);
+  flex-shrink: 0;
+  background: var(--color-sidebar-bg);
 }
 
 /* Desktop: extra top padding so title isn’t flush with viewport top */
@@ -174,8 +182,28 @@ body {
   grid-column: 1 / -1;
   grid-row: 2;
   min-height: 0;
-  overflow: auto;
+  overflow-x: hidden;
+  overflow-y: auto;
   padding: var(--page-gap);
+  scrollbar-width: thin;
+  scrollbar-color: rgba(0, 0, 0, 0.12) transparent;
+}
+
+.sidebar-nav::-webkit-scrollbar {
+  width: 5px;
+}
+
+.sidebar-nav::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.sidebar-nav::-webkit-scrollbar-thumb {
+  background-color: rgba(0, 0, 0, 0.1);
+  border-radius: 999px;
+}
+
+.sidebar-nav::-webkit-scrollbar-thumb:hover {
+  background-color: rgba(0, 0, 0, 0.18);
 }
 
 /* Uses: --font-nav-label-* (hidden: no "Contents" title) */
@@ -205,13 +233,12 @@ body {
 
 .sidebar-nav-list a {
   display: block;
-  margin-left: -16px;
-  /* Extend to sidebar right edge (nav padding + scrollbar area) */
-  margin-right: calc(-2 * var(--page-gap));
+  margin-left: calc(-1 * var(--page-gap));
+  margin-right: calc(-1 * var(--page-gap));
   padding-top: 12px;
   padding-bottom: 12px;
   padding-left: var(--page-gap);
-  padding-right: calc(2 * var(--page-gap));
+  padding-right: var(--page-gap);
   border: none;
   border-bottom: 1px solid #dbc7b9;
   color: inherit;
@@ -220,6 +247,10 @@ body {
 
 .sidebar-nav-list a:hover {
   background: var(--color-content-bg);
+}
+
+.sidebar-nav-list li.nav-item-grouped a {
+  padding-left: calc(var(--page-gap) + var(--nav-group-indent));
 }
 
 /* Toggle: on desktop, fixed on content left edge (outside sidebar); no background, hover only */
@@ -311,12 +342,14 @@ body {
   min-height: 100vh;
   display: flex;
   flex-direction: column;
-  overflow: visible;
+  overflow-x: hidden;
+  overflow-y: visible;
   background: var(--color-content-bg);
 }
 
 main {
   flex: 1;
+  max-width: 100%;
   padding: var(--content-top-padding) var(--page-gap) var(--page-gap);
 }
 
@@ -341,7 +374,7 @@ main .page-title {
 }
 
 main section {
-  margin-bottom: 2rem;
+  margin-bottom: var(--section-gap);
   /* When navigating to section, at least 24px above the section title */
   scroll-margin-top: 24px;
 }
@@ -478,10 +511,10 @@ main section blockquote {
 }
 
 /* About section: citation blockquote inside details — no padding, compact p margins */
-#about .detailed-explanation blockquote {
+[id^="about"] .detailed-explanation blockquote {
   padding: 0;
 }
-#about .detailed-explanation blockquote p {
+[id^="about"] .detailed-explanation blockquote p {
   margin-top: 8px;
   margin-bottom: 8px;
   margin-left: 12px;
@@ -599,7 +632,8 @@ main section blockquote {
     z-index: 99;
     background: var(--color-sidebar-bg);
     padding: var(--page-gap);
-    overflow: auto;
+    overflow-x: hidden;
+    overflow-y: auto;
     -webkit-overflow-scrolling: touch;
     /* Divider under sticky bar, same style as main page */
     border-top: 1px solid #ddd;
@@ -634,6 +668,10 @@ main section blockquote {
     padding-bottom: 12px;
     padding-left: var(--page-gap);
     padding-right: var(--page-gap);
+  }
+
+  .sidebar-wrapper.overlay-open .sidebar-nav-list li.nav-item-grouped a {
+    padding-left: calc(var(--page-gap) + var(--nav-group-indent));
   }
 
   /* Mobile: Index button — minimum 44×44px touch target (WCAG 2.5.5), room for "Index" + padding */
@@ -839,6 +877,7 @@ main code {
 main pre {
   margin: 1.25rem 0;
   padding: 1rem;
+  max-width: 100%;
   overflow-x: auto;
   border-radius: 6px;
   background: rgba(0, 0, 0, 0.06);
