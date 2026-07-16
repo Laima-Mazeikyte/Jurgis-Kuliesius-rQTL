@@ -4,7 +4,7 @@ id: about-inline
 navGrouped: true
 ---
 
-# About
+## About
 
 This interactive resource accompanies Poster 0146: TREM2 Ratio Proteogenomics in Alzheimer's Disease, presented at the 2026 AAIC (Alzheimer's Association Internation Conference) in London.
 

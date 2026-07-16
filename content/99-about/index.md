@@ -3,7 +3,7 @@ title: About
 navGrouped: true
 ---
 
-# About
+## About
 
 This interactive resource accompanies Poster P17.18LB: Multi-tissue Ratio Proteogenomics for Pathway Discovery, presented at the 2026 US HUPO (Human Proteome Organization) Conference.
 
